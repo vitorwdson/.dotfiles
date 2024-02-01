@@ -16,8 +16,8 @@ function install() {
     local path="$1"
     local name=$(basename "$path")
     local destiny_folder="$2"
-    local destiny="$HOME/$destiny_folder/$name"
-    local backup="$SCRIPT_DIR/backup/$destiny_folder/$name"
+    local destiny="$HOME/$destiny_folder$name"
+    local backup="$SCRIPT_DIR/backup/$destiny_folder$name"
 
     if [[ -L "$destiny" ]]; then
         unlink "$destiny"
@@ -34,10 +34,12 @@ function install() {
 
 configs=($SCRIPT_DIR/config/*)
 for f in "${configs[@]}"; do
-    install "$f" ".config"
+    install "$f" ".config/"
 done
 
 locals=($SCRIPT_DIR/local/*)
 for f in "${locals[@]}"; do
-    install "$f" ".local"
+    install "$f" ".local/"
 done
+
+install "$SCRIPT_DIR/zsh/.zshrc" ""
