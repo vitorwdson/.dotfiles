@@ -19,11 +19,16 @@ function install() {
     local destiny="$HOME/$destiny_folder/$name"
     local backup="$SCRIPT_DIR/backup/$destiny_folder/$name"
 
+    if [[ -L "$destiny" ]]; then
+        unlink "$destiny"
+    fi
+
     if [[ -e "$destiny" ]]; then
         cp -r "$destiny" "$backup"
         rm -rf "$destiny"
     fi
 
+    echo "Linking $path to $destiny"
     ln -s "$path" "$destiny"
 }
 
