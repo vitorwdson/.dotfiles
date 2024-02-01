@@ -12,7 +12,7 @@ if [[ ! -d "$SCRIPT_DIR/backup" ]]; then
     mkdir "$SCRIPT_DIR/backup/.local"
 fi
 
-function install() {
+function install_config() {
     local path="$1"
     local name=$(basename "$path")
     local destiny_folder="$2"
@@ -34,12 +34,54 @@ function install() {
 
 configs=($SCRIPT_DIR/config/*)
 for f in "${configs[@]}"; do
-    install "$f" ".config/"
+    install_config "$f" ".config/"
 done
 
 locals=($SCRIPT_DIR/local/*)
 for f in "${locals[@]}"; do
-    install "$f" ".local/"
+    install_config "$f" ".local/"
 done
 
-install "$SCRIPT_DIR/zsh/.zshrc" ""
+install_config "$SCRIPT_DIR/zsh/.zshrc" ""
+
+apt=$(command -v apt)
+dnf=$(command -v dnf)
+
+function install_package() {
+    if [ ! -z "$apt" ]; then
+        sudo apt install $1
+    elif [ ! -z "$dnf" ]; then
+        sudo dnf install $1
+    else
+        echo "Automatic installation not supported for this system, please install $1"
+    fi
+}
+
+zsh=$(command -v zsh)
+if [ -z "$zsh" ]; then
+    echo "Installing zsh"
+    install_package zsh
+fi
+
+fzf=$(command -v fzf)
+if [ -z "$fzf" ]; then
+    echo "Installing fzf"
+    install_package fzf
+fi
+
+ripgrep=$(command -v rg)
+if [ -z "$ripgrep" ]; then
+    echo "Installing ripgrep"
+    install_package ripgrep
+fi
+
+zsh=$(command -v zsh)
+if [ "$SHELL" != "$zsh" ]; then
+    echo "Your default shell is not zsh, trying to change..."
+
+    if [ ! -z "$dnf" ]; then
+        sudo lchsh $USER
+    else
+        chsh -s $(zsh)
+    fi
+fi
