@@ -1,0 +1,21 @@
+%YAML 1.3
+---
+- Rule:
+  - Setting: [B5FF777A, dpi, 4000]
+  - Key: [DPI Switch, pressed]
+  - Set: [B5FF777A, dpi, 2400]
+  - Execute: [notify-send, 'DPI: 2400', -a, Logitec MX Vertical]
+- Rule:
+  - Setting: [B5FF777A, dpi, 2400]
+  - Key: [DPI Switch, pressed]
+  - Set: [B5FF777A, dpi, 4000]
+  - Execute: [notify-send, 'DPI: 4000', -a, Logitec MX Vertical]
+...
+---
+- Rule:
+  - Key: [Back Button, pressed]
+  - MouseClick: [left, 9]
+- Rule:
+  - Key: [Back Button, released]
+  - MouseClick: [left, 9]
+...
