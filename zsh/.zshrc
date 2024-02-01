@@ -19,8 +19,8 @@ export EDITOR=nvim
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # fzf settings
-source "/home/vitorwdson/.fzf/shell/completion.zsh"
-source "/home/vitorwdson/.fzf/shell/key-bindings.zsh"
+source "$HOME/.fzf/shell/completion.zsh"
+source "$HOME/.fzf/shell/key-bindings.zsh"
 
 if [ -n "$VIRTUAL_ENV" ]; then
     source $VIRTUAL_ENV/bin/activate;
