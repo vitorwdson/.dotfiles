@@ -68,6 +68,12 @@ if [ -z "$zsh" ]; then
     install_package zsh
 fi
 
+tmux=$(command -v tmux)
+if [ -z "$tmux" ]; then
+    echo "Installing tmux"
+    install_package tmux
+fi
+
 fzf=$(command -v fzf)
 if [ -z "$fzf" ]; then
     echo "Installing fzf"
