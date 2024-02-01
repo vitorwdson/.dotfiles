@@ -2,6 +2,11 @@
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+echo ""
+echo "Linking config files and scripts..."
+echo ""
+echo ""
+
 if [[ ! -d "$SCRIPT_DIR/config/nvim" ]]; then
     git clone git@github.com:vitorwdson/nvim-config.git "$SCRIPT_DIR/config/nvim"
 fi
@@ -85,3 +90,29 @@ if [ "$SHELL" != "$zsh" ]; then
         chsh -s $(zsh)
     fi
 fi
+
+echo ""
+echo ""
+echo "Here are some programs you might need to install and the (current) way to install them:"
+echo ""
+echo "Kitty:"
+echo "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
+echo ""
+echo "Oh My Zsh:"
+echo "sh -c \"\$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+echo ""
+echo "Starship:"
+echo "curl -sS https://starship.rs/install.sh | sh"
+echo ""
+echo "zsh-syntax-highlighting:"
+echo "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+echo ""
+echo "zsh-autosuggestions:"
+echo "git clone https://github.com/zsh-users/zsh-autosuggestions \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+
+echo ""
+echo ""
+echo "Some other useful links:"
+echo ""
+echo "Configuring flashing/training for my moonlander:"
+echo "https://github.com/zsa/wally/wiki/Linux-install"
