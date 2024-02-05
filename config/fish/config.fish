@@ -13,7 +13,7 @@ if status is-interactive
 end
 
 if test -n "$VIRTUAL_ENV"
-    source $VIRTUAL_ENV/bin/activate;
+    source $VIRTUAL_ENV/bin/activate.fish
 end
 
 starship init fish | source
