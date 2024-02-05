@@ -47,8 +47,6 @@ for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
 
-install_config "$SCRIPT_DIR/zsh/.zshrc" ""
-
 apt=$(command -v apt)
 dnf=$(command -v dnf)
 
@@ -62,10 +60,10 @@ function install_package() {
     fi
 }
 
-zsh=$(command -v zsh)
-if [ -z "$zsh" ]; then
-    echo "Installing zsh"
-    install_package zsh
+fish=$(command -v fish)
+if [ -z "$fish" ]; then
+    echo "Installing fish"
+    install_package fish
 fi
 
 tmux=$(command -v tmux)
@@ -86,14 +84,14 @@ if [ -z "$ripgrep" ]; then
     install_package ripgrep
 fi
 
-zsh=$(command -v zsh)
-if [ "$SHELL" != "$zsh" ]; then
-    echo "Your default shell is not zsh, trying to change..."
+fish=$(command -v fish)
+if [ "$SHELL" != "$fish" ]; then
+    echo "Your default shell is not fish, trying to change..."
 
     if [ ! -z "$dnf" ]; then
         sudo lchsh $USER
     else
-        chsh -s $(zsh)
+        chsh -s $(fish)
     fi
 fi
 
@@ -104,17 +102,14 @@ echo ""
 echo "Kitty:"
 echo "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
 echo ""
-echo "Oh My Zsh:"
-echo "sh -c \"\$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+echo "Fisher:"
+echo "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
 echo ""
 echo "Starship:"
 echo "curl -sS https://starship.rs/install.sh | sh"
 echo ""
-echo "zsh-syntax-highlighting:"
-echo "git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-echo ""
-echo "zsh-autosuggestions:"
-echo "git clone https://github.com/zsh-users/zsh-autosuggestions \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+echo "fish-nvm:"
+echo "fisher install FabioAntunes/fish-nvm edc/bass"
 echo ""
 echo "Solaar:"
 echo "sudo dnf install solaar"
