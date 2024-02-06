@@ -2,7 +2,7 @@ fish_config theme choose "Dracula Official"
 set -g fish_greeting
 
 set PATH $HOME/.yarn/bin $HOME/.config/yarn/global/node_modules/.bin $PATH
-set PATH $HOME/go/bin $HOME/.local/scripts/ $HOME/.local/bin/ $HOME/.fzf/bin $HOME/.cargo/bin $PATH
+set PATH /usr/local/go/bin $HOME/go/bin $HOME/.local/scripts/ $HOME/.local/bin/ $HOME/.fzf/bin $HOME/.cargo/bin $PATH
 set EDITOR nvim
 
 bind \cH backward-kill-word
