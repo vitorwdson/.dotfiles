@@ -47,9 +47,6 @@ for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
 
-install_config "$SCRIPT_DIR/zsh/.zshrc" ""
-install_config "$SCRIPT_DIR/zsh/.p10k.zsh" ""
-
 apt=$(command -v apt)
 dnf=$(command -v dnf)
 
@@ -87,22 +84,10 @@ if [ -z "$ripgrep" ]; then
     install_package ripgrep
 fi
 
-zsh=$(command -v fish)
-if [ "$SHELL" != "$zsh" ]; then
-    echo "Your default shell is not zsh, trying to change..."
-
-    if [ ! -z "$dnf" ]; then
-        echo "Insert \"/bin/zsh\""
-        sudo lchsh $USER
-    else
-        chsh -s $(zsh)
-    fi
-fi
-
 OHMYZSH_DIR="$HOME/.oh-my-zsh"
 if [[ ! -d "$OHMYZSH_DIR" ]]; then
     echo "Installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
@@ -119,6 +104,21 @@ fi
 if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]]; then
     echo "Installing zsh-autosuggestions"
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+fi
+
+install_config "$SCRIPT_DIR/zsh/.zshrc" ""
+install_config "$SCRIPT_DIR/zsh/.p10k.zsh" ""
+
+zsh=$(command -v fish)
+if [ "$SHELL" != "$zsh" ]; then
+    echo "Your default shell is not zsh, trying to change..."
+
+    if [ ! -z "$dnf" ]; then
+        echo "Insert \"/bin/zsh\""
+        sudo lchsh $USER
+    else
+        chsh -s $(zsh)
+    fi
 fi
 
 echo ""
