@@ -9,7 +9,6 @@ bind \cH backward-kill-word
 alias vim="nvim"
 
 if status is-interactive
-    # Commands to run in interactive sessions can go here
 end
 
 if test -n "$VIRTUAL_ENV"
