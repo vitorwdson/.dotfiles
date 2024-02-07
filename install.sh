@@ -47,6 +47,9 @@ for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
 
+install_config "$SCRIPT_DIR/zsh/.zshrc" ""
+install_config "$SCRIPT_DIR/zsh/.p10k.zsh" ""
+
 apt=$(command -v apt)
 dnf=$(command -v dnf)
 
@@ -60,10 +63,10 @@ function install_package() {
     fi
 }
 
-fish=$(command -v fish)
-if [ -z "$fish" ]; then
-    echo "Installing fish"
-    install_package fish
+zsh=$(command -v fish)
+if [ -z "$zsh" ]; then
+    echo "Installing zsh"
+    install_package zsh
 fi
 
 tmux=$(command -v tmux)
@@ -84,15 +87,38 @@ if [ -z "$ripgrep" ]; then
     install_package ripgrep
 fi
 
-fish=$(command -v fish)
-if [ "$SHELL" != "$fish" ]; then
-    echo "Your default shell is not fish, trying to change..."
+zsh=$(command -v fish)
+if [ "$SHELL" != "$zsh" ]; then
+    echo "Your default shell is not zsh, trying to change..."
 
     if [ ! -z "$dnf" ]; then
+        echo "Insert \"/bin/zsh\""
         sudo lchsh $USER
     else
-        chsh -s $(fish)
+        chsh -s $(zsh)
     fi
+fi
+
+OHMYZSH_DIR="$HOME/.oh-my-zsh"
+if [[ ! -d "$OHMYZSH_DIR" ]]; then
+    echo "Installing oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+if [[ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]]; then
+    echo "Installing powerlevel10k"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
+fi
+
+if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]]; then
+    echo "Installing zsh-syntax-highlighting"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+fi
+
+if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]]; then
+    echo "Installing zsh-autosuggestions"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
 fi
 
 echo ""
@@ -101,15 +127,6 @@ echo "Here are some programs you might need to install and the (current) way to 
 echo ""
 echo "Kitty:"
 echo "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
-echo ""
-echo "Fisher:"
-echo "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-echo ""
-echo "Starship:"
-echo "curl -sS https://starship.rs/install.sh | sh"
-echo ""
-echo "fish-nvm:"
-echo "fisher install FabioAntunes/fish-nvm edc/bass"
 echo ""
 echo "Solaar:"
 echo "sudo dnf install solaar"

@@ -18,21 +18,6 @@ Here are some programs you might need to install and the (current) way to instal
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 ```
 
-- [Fisher](https://github.com/jorgebucaran/fisher):
-```bash
-curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-```
-
-- [Starship](https://starship.rs/guide/#%F0%9F%9A%80-installation):
-```bash
-curl -sS https://starship.rs/install.sh | sh
-```
-
-- [fish-nvm](https://github.com/FabioAntunes/fish-nvm):
-```bash
-fisher install FabioAntunes/fish-nvm edc/bass
-```
-
 - [Solaar](https://pwr-solaar.github.io/Solaar/installation):
 ```bash
 sudo dnf install solaar
