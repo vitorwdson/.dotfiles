@@ -354,6 +354,8 @@ tmux_conf_copy_to_os_clipboard=false
 # start with mouse mode enabled
 set -g mouse on
 
+set -sg repeat-time 0
+
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
 set -g status-keys vi
