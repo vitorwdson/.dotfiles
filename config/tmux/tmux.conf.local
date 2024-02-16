@@ -365,6 +365,8 @@ set -g mode-keys vi
 set -gu prefix2
 unbind C-a
 unbind C-b
+unbind C-f
+
 set -g prefix C-a
 bind C-a send-prefix
 
@@ -376,6 +378,17 @@ bind C-a send-prefix
 
 bind-key -r W run-shell "tmux neww ~/.local/scripts/tmux-cht.sh" #!important
 bind-key -r f run-shell "tmux neww ~/.local/scripts/tmux-sessionizer.sh"
+
+bind-key -r "'" select-window -t 1 #!important
+bind-key -r "{" select-window -t 2 #!important
+bind-key -r "[" select-window -t 3 #!important
+bind-key -r "(" select-window -t 4 #!important
+bind-key -r "$" select-window -t 5 #!important
+bind-key -r "&" select-window -t 6 #!important
+bind-key -r ")" select-window -t 7 #!important
+bind-key -r "]" select-window -t 8 #!important
+bind-key -r "}" select-window -t 9 #!important
+bind-key -r '"' select-window -t 10 #!important
 # -- tpm -----------------------------------------------------------------------
 
 # while I don't use tpm myself, many people requested official support so here
