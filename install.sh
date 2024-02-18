@@ -12,9 +12,8 @@ if [[ ! -d "$SCRIPT_DIR/config/nvim" ]]; then
 fi
 
 if [[ ! -d "$SCRIPT_DIR/backup" ]]; then
-    mkdir "$SCRIPT_DIR/backup"
-    mkdir "$SCRIPT_DIR/backup/.config"
-    mkdir "$SCRIPT_DIR/backup/.local"
+    mkdir -p "$SCRIPT_DIR/backup/.config/systemd/user"
+    mkdir -p "$SCRIPT_DIR/backup/.local"
 fi
 
 function install_config() {
@@ -46,6 +45,8 @@ locals=($SCRIPT_DIR/local/*)
 for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
+
+install_config "$SCRIPT_DIR/systemd/ssh-agent.service" ".config/systemd/user/"
 
 echo ""
 read -p "Do you wish to install the required packages (apt or dnf only)? (y/N): " confirm
