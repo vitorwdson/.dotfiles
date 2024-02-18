@@ -1,0 +1,170 @@
+* {
+  border: none;
+  border-radius: 0px;
+  font-family: "FiraCode Nerd Font";
+  font-weight: bold;
+  font-size: 11px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(21, 18, 27, 0);
+  color: #cdd6f4;
+}
+
+tooltip {
+  background: #1e1e2e;
+  border-radius: 10px;
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: #11111b;
+}
+
+#workspaces button:not(:last-child) {
+  margin-right: 5px;
+}
+
+#workspaces button {
+  color: #313244;
+  padding: 5px;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+#workspaces button.active {
+  color: #a6adc8;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#workspaces button.focused {
+  color: #a6adc8;
+  background: #eba0ac;
+}
+
+#workspaces button.urgent {
+  color: #f9e2af;
+}
+
+#workspaces button:hover {
+  background: #11111b;
+  color: #cdd6f4;
+}
+
+#custom-power_profile,
+#custom-weather,
+#custom-spotify,
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#bluetooth,
+#temperature,
+#workspaces,
+#tray,
+#backlight {
+  background: #1e1e2e;
+  opacity: 0.8;
+  padding: 0px 10px;
+  margin: 0;
+  margin-top: 5px;
+  border: 1px solid #181825;
+}
+
+#temperature {
+  border-radius: 20px 0px 0px 20px;
+}
+
+#temperature.critical {
+  color: #eba0ac;
+}
+
+#backlight {
+  border-radius: 20px 0px 0px 20px;
+  padding-left: 7px;
+}
+
+#tray {
+  border-radius: 20px;
+  margin-right: 5px;
+  padding: 0px 10px;
+}
+
+#workspaces {
+  background: #1e1e2e;
+  border-radius: 20px;
+  margin-left: 5px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+#custom-power_profile {
+  color: #a6e3a1;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+#window {
+  border-radius: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#clock {
+  color: #89b4fa;
+  border-radius: 20px;
+  margin-left: 5px;
+  border-right: 0px;
+  padding-left: 7px;
+}
+
+#network {
+  color: #f9e2af;
+  border-radius: 20px 0px 0px 20px;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+#bluetooth {
+  color: #89b4fa;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+#pulseaudio {
+  color: #89b4fa;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+#pulseaudio.microphone {
+  color: #cba6f7;
+  border-left: 0px;
+  border-right: 0px;
+  border-radius: 0px 20px 20px 0px;
+  margin-right: 5px;
+  padding-right: 8px;
+}
+
+#battery {
+  color: #a6e3a1;
+  border-radius: 0 20px 20px 0;
+  margin-right: 5px;
+  border-left: 0px;
+}
+
+#custom-weather {
+  border-radius: 20px;
+  border-right: 0px;
+  margin-left: 0px;
+}
+
+#custom-spotify {
+  border-radius: 20px;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+#custom-spotify.playing {
+  color: #a6e3a1;
+}
