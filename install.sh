@@ -47,77 +47,88 @@ for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
 
-apt=$(command -v apt)
-dnf=$(command -v dnf)
+echo ""
+read -p "Do you wish to install the required packages (apt or dnf only)? (y/N): " confirm
+echo ""
 
-function install_package() {
-    if [ ! -z "$apt" ]; then
-        sudo apt install $1
-    elif [ ! -z "$dnf" ]; then
-        sudo dnf install $1
-    else
-        echo "Automatic installation not supported for this system, please install $1"
+if [[ "$confirm" =~ ^[Yy]$ ]]; then
+    echo "installing required packages..."
+    echo ""
+
+    apt=$(command -v apt)
+    dnf=$(command -v dnf)
+
+    function install_package() {
+        if [ ! -z "$apt" ]; then
+            sudo apt install $1
+        elif [ ! -z "$dnf" ]; then
+            sudo dnf install $1
+        else
+            echo "Automatic installation not supported for this system, please install $1"
+        fi
+    }
+
+    zsh=$(command -v fish)
+    if [ -z "$zsh" ]; then
+        echo "Installing zsh"
+        install_package zsh
     fi
-}
 
-zsh=$(command -v fish)
-if [ -z "$zsh" ]; then
-    echo "Installing zsh"
-    install_package zsh
-fi
+    tmux=$(command -v tmux)
+    if [ -z "$tmux" ]; then
+        echo "Installing tmux"
+        install_package tmux
+    fi
 
-tmux=$(command -v tmux)
-if [ -z "$tmux" ]; then
-    echo "Installing tmux"
-    install_package tmux
-fi
+    fzf=$(command -v fzf)
+    if [ -z "$fzf" ]; then
+        echo "Installing fzf"
+        install_package fzf
+    fi
 
-fzf=$(command -v fzf)
-if [ -z "$fzf" ]; then
-    echo "Installing fzf"
-    install_package fzf
-fi
+    ripgrep=$(command -v rg)
+    if [ -z "$ripgrep" ]; then
+        echo "Installing ripgrep"
+        install_package ripgrep
+    fi
 
-ripgrep=$(command -v rg)
-if [ -z "$ripgrep" ]; then
-    echo "Installing ripgrep"
-    install_package ripgrep
-fi
+    OHMYZSH_DIR="$HOME/.oh-my-zsh"
+    if [[ ! -d "$OHMYZSH_DIR" ]]; then
+        echo "Installing oh-my-zsh"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    fi
 
-OHMYZSH_DIR="$HOME/.oh-my-zsh"
-if [[ ! -d "$OHMYZSH_DIR" ]]; then
-    echo "Installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
+    ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+    if [[ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]]; then
+        echo "Installing powerlevel10k"
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
+    fi
 
-ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
-if [[ ! -d "$ZSH_CUSTOM/themes/powerlevel10k" ]]; then
-    echo "Installing powerlevel10k"
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM}/themes/powerlevel10k
-fi
+    if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]]; then
+        echo "Installing zsh-syntax-highlighting"
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
+    fi
 
-if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]]; then
-    echo "Installing zsh-syntax-highlighting"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
-fi
-
-if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]]; then
-    echo "Installing zsh-autosuggestions"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+    if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]]; then
+        echo "Installing zsh-autosuggestions"
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+    fi
 fi
 
 install_config "$SCRIPT_DIR/zsh/.zshrc" ""
 install_config "$SCRIPT_DIR/zsh/.p10k.zsh" ""
 
-zsh=$(command -v fish)
-if [ "$SHELL" != "$zsh" ]; then
-    echo "Your default shell is not zsh, trying to change..."
+if [[ $confirm =~ ^[Yy]$ ]]; then
+    zsh=$(command -v fish)
+    if [ "$SHELL" != "$zsh" ]; then
+        echo "Your default shell is not zsh, trying to change..."
 
-    if [ ! -z "$dnf" ]; then
-        echo "Insert \"/bin/zsh\""
-        sudo lchsh $USER
-    else
-        chsh -s $(zsh)
+        if [ ! -z "$dnf" ]; then
+            echo "Insert \"/bin/zsh\""
+            sudo lchsh $USER
+        else
+            chsh -s $(zsh)
+        fi
     fi
 fi
 
