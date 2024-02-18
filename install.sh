@@ -46,6 +46,7 @@ for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
 
+mkdir -p "$HOME/.config/systemd/user"
 install_config "$SCRIPT_DIR/systemd/ssh-agent.service" ".config/systemd/user/"
 
 echo ""
