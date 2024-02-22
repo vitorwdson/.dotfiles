@@ -30,7 +30,3 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 export PATH="/usr/local/go/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/go/bin:$HOME/.local/scripts/:$HOME/.local/bin/:$HOME/.fzf/bin:$HOME/.cargo/bin:$PATH"
 export EDITOR=nvim 
-
-# fzf settings
-source "$HOME/.fzf/shell/completion.zsh"
-source "$HOME/.fzf/shell/key-bindings.zsh"

@@ -5,7 +5,7 @@
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
-    "height": 30,
+    "height": 32,
     "modules-left": [
         "hyprland/workspaces",
         "custom/spotify"
@@ -32,8 +32,7 @@
             "3": "",
             "4": "",
             "6": "󰆼",
-            "9": "",
-            "10": "󰓓"
+            "10": ""
         },
         "persistent-workspaces": {
             "*": 4
