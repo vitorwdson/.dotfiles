@@ -50,7 +50,7 @@ mkdir -p "$HOME/.config/systemd/user"
 install_config "$SCRIPT_DIR/systemd/ssh-agent.service" ".config/systemd/user/"
 
 echo ""
-read -p "Do you wish to install the required packages (apt or dnf only)? (y/N): " confirm
+read -p "Do you wish to install the required packages (apt, dnf or pacman only)? (y/N): " confirm
 echo ""
 
 if [[ "$confirm" =~ ^[Yy]$ ]]; then
@@ -59,18 +59,21 @@ if [[ "$confirm" =~ ^[Yy]$ ]]; then
 
     apt=$(command -v apt)
     dnf=$(command -v dnf)
+    pacman=$(command -v pacman)
 
     function install_package() {
         if [ ! -z "$apt" ]; then
             sudo apt install $1
         elif [ ! -z "$dnf" ]; then
             sudo dnf install $1
+        elif [ ! -z "$pacman" ]; then
+            sudo pacman -S $1
         else
             echo "Automatic installation not supported for this system, please install $1"
         fi
     }
 
-    zsh=$(command -v fish)
+    zsh=$(command -v zsh)
     if [ -z "$zsh" ]; then
         echo "Installing zsh"
         install_package zsh
@@ -121,7 +124,7 @@ install_config "$SCRIPT_DIR/zsh/.zshrc" ""
 install_config "$SCRIPT_DIR/zsh/.p10k.zsh" ""
 
 if [[ $confirm =~ ^[Yy]$ ]]; then
-    zsh=$(command -v fish)
+    zsh=$(command -v zsh)
     if [ "$SHELL" != "$zsh" ]; then
         echo "Your default shell is not zsh, trying to change..."
 
