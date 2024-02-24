@@ -1,6 +1,6 @@
 {
     "label" : "logout",
-    "action" : "loginctl terminate-user $USER",
+    "action" : "loginctl kill-user $(whoami)",
     "text" : "Logout",
     "keybind" : "o"
 }
