@@ -18,5 +18,5 @@ read -p "Do you wish to enable sddm? (y/N): " confirm
 echo ""
 
 if [[ "$confirm" =~ ^[Yy]$ ]]; then
-    sudo systemctl --enable sddm
+    sudo systemctl enable sddm
 fi
