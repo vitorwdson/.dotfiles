@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo pacman -S qt5-graphicaleffects qt5-quickcontrols2 qt5-wayland qt6-wayland \
     wofi xdg-desktop-portal-gtk xdg-utils dolphin glib2
 

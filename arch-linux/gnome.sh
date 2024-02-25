@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo pacman -S gnome gnome-extra gnome-themes-extra gnome-shell-extension-appindicator
 yay -S gnome-shell-extension-blur-my-shell gnome-shell-extension-dash-to-dock
 

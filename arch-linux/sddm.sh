@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo pacman -S sddm
 yay -S sddm-theme-tokyo-night
 

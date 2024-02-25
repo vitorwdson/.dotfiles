@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 sudo pacman -S base base-devel eog zsh firefox foot fzf gamemode git grub htop \
     keychain kitty man-db mangohud neovim nfs-utils noto-fonts noto-fonts-cjk \
     noto-fonts-emoji os-prober pamixer pipewire pipewire-alsa pipewire-jack \
