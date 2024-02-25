@@ -46,54 +46,85 @@ for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
 
+if [ -f "/etc/arch-release" ]; then
+    echo ""
+    read -p "Do you wish to install yay and some core packages? (y/N): " confirm
+    echo ""
+
+    if [[ "$confirm" =~ ^[Yy]$ ]]; then
+        $SCRIPT_DIR/arch-linux/install-yay.sh
+        $SCRIPT_DIR/arch-linux/core.sh
+
+        echo ""
+        read -p "Do you wish to install hyprland? (y/N): " confirm
+        echo ""
+
+        if [[ "$confirm" =~ ^[Yy]$ ]]; then
+            $SCRIPT_DIR/arch-linux/hyprland.sh
+        fi
+
+        echo ""
+        read -p "Do you wish to install GNOME? (y/N): " confirm
+        echo ""
+
+        if [[ "$confirm" =~ ^[Yy]$ ]]; then
+            $SCRIPT_DIR/arch-linux/gnome.sh
+        fi
+    fi
+else
+    echo ""
+    read -p "Do you wish to install the required packages (apt, dnf)? (y/N): " confirm
+    echo ""
+
+    if [[ "$confirm" =~ ^[Yy]$ ]]; then
+        echo "installing required packages..."
+        echo ""
+
+        apt=$(command -v apt)
+        dnf=$(command -v dnf)
+        pacman=$(command -v pacman)
+
+        function install_package() {
+            if [ ! -z "$apt" ]; then
+                sudo apt install $1
+            elif [ ! -z "$dnf" ]; then
+                sudo dnf install $1
+            else
+                echo "Automatic installation not supported for this system, please install $1"
+            fi
+        }
+
+        zsh=$(command -v zsh)
+        if [ -z "$zsh" ]; then
+            echo "Installing zsh"
+            install_package zsh
+        fi
+
+        tmux=$(command -v tmux)
+        if [ -z "$tmux" ]; then
+            echo "Installing tmux"
+            install_package tmux
+        fi
+
+        fzf=$(command -v fzf)
+        if [ -z "$fzf" ]; then
+            echo "Installing fzf"
+            install_package fzf
+        fi
+
+        ripgrep=$(command -v rg)
+        if [ -z "$ripgrep" ]; then
+            echo "Installing ripgrep"
+            install_package ripgrep
+        fi
+    fi
+fi
+
 echo ""
-read -p "Do you wish to install the required packages (apt, dnf or pacman only)? (y/N): " confirm
+read -p "Do you wish to install oh-my-zsh and it's plugins? (y/N): " confirm
 echo ""
 
 if [[ "$confirm" =~ ^[Yy]$ ]]; then
-    echo "installing required packages..."
-    echo ""
-
-    apt=$(command -v apt)
-    dnf=$(command -v dnf)
-    pacman=$(command -v pacman)
-
-    function install_package() {
-        if [ ! -z "$apt" ]; then
-            sudo apt install $1
-        elif [ ! -z "$dnf" ]; then
-            sudo dnf install $1
-        elif [ ! -z "$pacman" ]; then
-            sudo pacman -S $1
-        else
-            echo "Automatic installation not supported for this system, please install $1"
-        fi
-    }
-
-    zsh=$(command -v zsh)
-    if [ -z "$zsh" ]; then
-        echo "Installing zsh"
-        install_package zsh
-    fi
-
-    tmux=$(command -v tmux)
-    if [ -z "$tmux" ]; then
-        echo "Installing tmux"
-        install_package tmux
-    fi
-
-    fzf=$(command -v fzf)
-    if [ -z "$fzf" ]; then
-        echo "Installing fzf"
-        install_package fzf
-    fi
-
-    ripgrep=$(command -v rg)
-    if [ -z "$ripgrep" ]; then
-        echo "Installing ripgrep"
-        install_package ripgrep
-    fi
-
     OHMYZSH_DIR="$HOME/.oh-my-zsh"
     if [[ ! -d "$OHMYZSH_DIR" ]]; then
         echo "Installing oh-my-zsh"
@@ -119,6 +150,10 @@ fi
 
 install_config "$SCRIPT_DIR/zsh/.zshrc" ""
 install_config "$SCRIPT_DIR/zsh/.p10k.zsh" ""
+
+echo ""
+read -p "Do you wish to set zsh as the default shell? (y/N): " confirm
+echo ""
 
 if [[ $confirm =~ ^[Yy]$ ]]; then
     zsh=$(command -v zsh)
