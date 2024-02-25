@@ -54,22 +54,6 @@ if [ -f "/etc/arch-release" ]; then
     if [[ "$confirm" =~ ^[Yy]$ ]]; then
         $SCRIPT_DIR/arch-linux/install-yay.sh
         $SCRIPT_DIR/arch-linux/core.sh
-
-        echo ""
-        read -p "Do you wish to install hyprland? (y/N): " confirm
-        echo ""
-
-        if [[ "$confirm" =~ ^[Yy]$ ]]; then
-            $SCRIPT_DIR/arch-linux/hyprland.sh
-        fi
-
-        echo ""
-        read -p "Do you wish to install GNOME? (y/N): " confirm
-        echo ""
-
-        if [[ "$confirm" =~ ^[Yy]$ ]]; then
-            $SCRIPT_DIR/arch-linux/gnome.sh
-        fi
     fi
 else
     echo ""
