@@ -9,5 +9,6 @@ read -p "Do you wish to enable gdm? (y/N): " confirm
 echo ""
 
 if [[ "$confirm" =~ ^[Yy]$ ]]; then
+    sudo systemctl disable sddm
     sudo systemctl enable gdm 
 fi
