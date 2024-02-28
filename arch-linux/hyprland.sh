@@ -5,7 +5,7 @@ sudo pacman -S qt5-graphicaleffects qt5-quickcontrols2 qt5-wayland qt6-wayland \
 
 yay -S hyprland-git hyprpaper-git hyprpicker hyprshot-git mako-git \
     swaylock-effects-git thunar-csd waybar-git wl-clipboard-git wlogout \
-    xdg-desktop-portal-hyprland-git
+    xdg-desktop-portal-hyprland-git rofi-lbonn-wayland
 
 gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
 
