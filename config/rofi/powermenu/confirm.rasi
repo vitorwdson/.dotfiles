@@ -1,0 +1,17 @@
+@import "~/.config/rofi/powermenu/theme.rasi"
+
+* {
+    message-margin:              0px 150px;
+}
+
+listview {
+    columns:                     2;
+}
+
+mainbox {
+    children:                    [ "dummy", "inputbar", "listview", "dummy" ];
+}
+
+listview {
+    margin:                      0px 200px;
+}
