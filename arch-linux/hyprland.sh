@@ -2,12 +2,12 @@
 
 sudo pacman -S qt5-graphicaleffects qt5-quickcontrols2 qt5-wayland qt6-wayland \
     wofi xdg-desktop-portal-gtk xdg-utils dolphin glib2 gnome-themes-extra \
-    eog keychain pamixer rhythmbox
+    eog keychain pamixer rhythmbox pavucontrol
 
 yay -S hyprland-git hyprpaper-git hyprpicker hyprshot-git mako-git \
     swaylock-effects-git thunar-csd waybar-git wl-clipboard-git \
     xdg-desktop-portal-hyprland-git rofi-lbonn-wayland udiskie-systemd-git  \
-    grim-git slurp-git 
+    grim-git slurp-git pyprland-git
 
 gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
 

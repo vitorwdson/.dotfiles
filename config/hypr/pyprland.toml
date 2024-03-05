@@ -1,0 +1,23 @@
+[pyprland]
+plugins = ["scratchpads"]
+
+[scratchpads.term]
+animation = "fromTop"
+command = "kitty --class kitty-dropterm"
+class = "kitty-dropterm"
+size = "75% 60%"
+max_size = "1920px 100%"
+margin = 40
+hysteresis = 0
+offset = 0
+
+[scratchpads.volume]
+animation = "fromRight"
+command = "pavucontrol"
+class = "pavucontrol"
+size = "40% 40%"
+position = "1146px 640px"
+unfocus = "hide"
+lazy = true
+hysteresis = 0
+offset = 0
