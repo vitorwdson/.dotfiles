@@ -26,9 +26,13 @@ tooltip {
 
 #workspaces button {
   color: #313244;
-  padding: 5px;
+  padding: 0 7px 0 3px;
   border-radius: 20px;
   transition: 0.3s;
+}
+
+#workspaces button label {
+  font-size: 15px;
 }
 
 #workspaces button.active {
@@ -53,6 +57,7 @@ tooltip {
 #custom-power_profile,
 #custom-weather,
 #custom-spotify,
+#custom-powermenu,
 #window,
 #clock,
 #battery,
@@ -62,6 +67,8 @@ tooltip {
 #temperature,
 #workspaces,
 #tray,
+#cpu,
+#memory,
 #backlight {
   background: #1e1e2e;
   opacity: 0.8;
@@ -71,17 +78,17 @@ tooltip {
   border: 1px solid #181825;
 }
 
-#temperature {
+#memory {
   border-radius: 20px 0px 0px 20px;
+  padding: 0px 10px;
+  border-right: 0px;
 }
 
-#temperature.critical {
-  color: #eba0ac;
-}
-
-#backlight {
-  border-radius: 20px 0px 0px 20px;
-  padding-left: 7px;
+#cpu {
+  border-radius: 0px 20px 20px 0px;
+  margin-right: 5px;
+  padding: 0px 10px;
+  border-left: 0px;
 }
 
 #tray {
@@ -93,7 +100,7 @@ tooltip {
 #workspaces {
   background: #1e1e2e;
   border-radius: 20px;
-  margin-left: 5px;
+  margin-left: 6px;
   padding-right: 0px;
   padding-left: 0px;
 }
@@ -135,28 +142,9 @@ tooltip {
   color: #89b4fa;
   border-left: 0px;
   border-right: 0px;
-}
-
-#pulseaudio.microphone {
-  color: #cba6f7;
-  border-left: 0px;
-  border-right: 0px;
   border-radius: 0px 20px 20px 0px;
   margin-right: 5px;
   padding-right: 8px;
-}
-
-#battery {
-  color: #a6e3a1;
-  border-radius: 0 20px 20px 0;
-  margin-right: 5px;
-  border-left: 0px;
-}
-
-#custom-weather {
-  border-radius: 20px;
-  border-right: 0px;
-  margin-left: 0px;
 }
 
 #custom-spotify {
@@ -167,4 +155,17 @@ tooltip {
 
 #custom-spotify.playing {
   color: #a6e3a1;
+}
+
+#custom-powermenu {
+  border-radius: 100%;
+  margin-right: 6px;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 0 10px 0 6;
+}
+
+#custom-powermenu:hover {
+  background: #11111b;
+  color: #cdd6f4;
 }

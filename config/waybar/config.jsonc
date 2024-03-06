@@ -15,13 +15,12 @@
     ],
     "modules-right": [
         "tray",
+        "memory",
+        "cpu",
         "network",
         "pulseaudio",
-        "pulseaudio#microphone"
+        "custom/powermenu"
     ],
-    "hyprland/window": {
-        "format": "{}"
-    },
     "hyprland/workspaces": {
         "format": "{icon}",
         "on-scroll-up": "hyprctl dispatch workspace e-1",
@@ -87,24 +86,37 @@
             ]
         }
     },
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "format-source": "Mic: {volume}%",
-        "format-source-muted": "Mic: Muted",
-        "on-click": "pamixer --default-source -t",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
-    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "  {signalStrength}%",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{essid} - {ifname} via {gwaddr} ",
+        "format-ethernet": " Wired",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
     },
+
+    "cpu": {
+        "interval": 10,
+        "format": "{icon} ",
+        "format-alt": "{usage}% ",
+        "format-icons": [
+            "<span color='#69ff94'>▁</span>", // green
+            "<span color='#2aa9ff'>▂</span>", // blue
+            "<span color='#f8f8f2'>▃</span>", // white
+            "<span color='#f8f8f2'>▄</span>", // white
+            "<span color='#ffffa5'>▅</span>", // yellow
+            "<span color='#ffffa5'>▆</span>", // yellow
+            "<span color='#ff9977'>▇</span>", // orange
+            "<span color='#dd532e'>█</span>" // red
+        ]
+    },
+
+    "memory": {
+        "interval": 10,
+        "format": "{}% ",
+        "max-length": 10
+    },
+
     "custom/spotify": {
         "format": "{}",
         "exec": "~/.config/waybar/scripts/spotify.sh",
@@ -115,5 +127,11 @@
         "exec-if": "pgrep spotify",
         "interval": 5,
         "exec-on-event": true
+    },
+
+    "custom/powermenu": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "wlogout"
     }
 }
