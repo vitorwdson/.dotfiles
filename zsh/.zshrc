@@ -11,7 +11,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 bindkey '^H' backward-kill-word
-alias vim="nvim"
 
 if [ -n "$VIRTUAL_ENV" ]; then
     source $VIRTUAL_ENV/bin/activate;
@@ -35,3 +34,7 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 export PATH="/usr/local/go/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/go/bin:$HOME/.local/scripts/:$HOME/.local/bin/:$HOME/.fzf/bin:$HOME/.cargo/bin:$PATH"
 export EDITOR=nvim 
+
+alias vim="nvim"
+alias ls='lsd'
+alias lt='ls --tree'
