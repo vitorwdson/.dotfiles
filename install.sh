@@ -8,7 +8,11 @@ echo ""
 echo ""
 
 if [[ ! -d "$SCRIPT_DIR/config/nvim" ]]; then
-    git clone git@github.com:vitorwdson/nvim-config.git "$SCRIPT_DIR/config/nvim"
+    if [[ -d "$HOME/.ssh" ]]; then
+        git clone git@github.com:vitorwdson/nvim-config.git "$SCRIPT_DIR/config/nvim"
+    else
+        git clone https://github.com/vitorwdson/nvim-config.git "$SCRIPT_DIR/config/nvim"
+    fi
 fi
 
 if [[ ! -d "$SCRIPT_DIR/backup" ]]; then
@@ -101,6 +105,8 @@ else
             echo "Installing ripgrep"
             install_package ripgrep
         fi
+
+        sudo git clone https://github.com/tmux-plugins/tpm /usr/share/tmux-plugin-manager
     fi
 fi
 
