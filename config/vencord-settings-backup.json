@@ -37,7 +37,7 @@
                 "enabled": false
             },
             "MessageEventsAPI": {
-                "enabled": false
+                "enabled": true
             },
             "MessagePopoverAPI": {
                 "enabled": false
@@ -102,7 +102,7 @@
                 "enabled": false
             },
             "BlurNSFW": {
-                "enabled": true,
+                "enabled": false,
                 "blurAmount": 10
             },
             "CallTimer": {
@@ -124,7 +124,7 @@
                 "enabled": false
             },
             "CrashHandler": {
-                "enabled": true
+                "enabled": false
             },
             "CustomRPC": {
                 "enabled": false
@@ -148,7 +148,17 @@
                 "enabled": false
             },
             "FakeNitro": {
-                "enabled": false
+                "enabled": true,
+                "enableEmojiBypass": true,
+                "enableStickerBypass": true,
+                "enableStreamQualityBypass": true,
+                "transformStickers": true,
+                "transformEmojis": true,
+                "transformCompoundSentence": false,
+                "emojiSize": 48,
+                "hyperLinkText": "{{NAME}}",
+                "useHyperLinks": true,
+                "stickerSize": 160
             },
             "FakeProfileThemes": {
                 "enabled": false
@@ -163,10 +173,10 @@
                 "enabled": false
             },
             "FixSpotifyEmbeds": {
-                "enabled": false
+                "enabled": true
             },
             "FixYoutubeEmbeds": {
-                "enabled": true
+                "enabled": false
             },
             "ForceOwnerCrown": {
                 "enabled": false
@@ -232,10 +242,12 @@
                 "enabled": false
             },
             "Moyai": {
-                "enabled": false
-            },
-            "MuteNewGuild": {
-                "enabled": false
+                "enabled": false,
+                "volume": 0.5,
+                "quality": "Normal",
+                "triggerWhenUnfocused": true,
+                "ignoreBots": true,
+                "ignoreBlocked": true
             },
             "MutualGroupDMs": {
                 "enabled": false
@@ -288,7 +300,10 @@
                 "enabled": false
             },
             "OpenInApp": {
-                "enabled": false
+                "enabled": false,
+                "spotify": true,
+                "steam": true,
+                "epic": true
             },
             "Party mode 🎉": {
                 "enabled": false
@@ -318,7 +333,12 @@
                 "enabled": false
             },
             "PronounDB": {
-                "enabled": false
+                "enabled": false,
+                "pronounsFormat": "LOWERCASE",
+                "pronounSource": 0,
+                "showSelf": true,
+                "showInMessages": true,
+                "showInProfile": true
             },
             "QuickMention": {
                 "enabled": false
@@ -363,7 +383,9 @@
                 "enabled": false
             },
             "ShikiCodeblocks": {
-                "enabled": false
+                "enabled": true,
+                "useDevIcon": "GREYSCALE",
+                "theme": "https://raw.githubusercontent.com/shikijs/shiki/0b28ad8ccfbf2615f2d9d38ea8255416b8ac3043/packages/shiki/themes/dark-plus.json"
             },
             "ShowAllMessageButtons": {
                 "enabled": false
@@ -456,14 +478,16 @@
                 "enabled": false
             },
             "VoiceMessages": {
-                "enabled": true
+                "enabled": false,
+                "echoCancellation": true,
+                "noiseSuppression": true
             },
             "WebContextMenus": {
                 "enabled": true,
                 "addBack": true
             },
             "WebKeybinds": {
-                "enabled": true
+                "enabled": false
             },
             "WhoReacted": {
                 "enabled": false
@@ -472,6 +496,26 @@
                 "enabled": false
             },
             "XSOverlay": {
+                "enabled": false
+            },
+            "NewGuildSettings": {
+                "enabled": false
+            },
+            "BetterRoleContext": {
+                "enabled": false
+            },
+            "FriendsSince": {
+                "enabled": false
+            },
+            "ResurrectHome": {
+                "enabled": false
+            },
+            "BetterSettings": {
+                "enabled": true,
+                "disableFade": true,
+                "eagerLoad": true
+            },
+            "OverrideForumDefaults": {
                 "enabled": false
             }
         },
@@ -485,7 +529,7 @@
             "authenticated": false,
             "url": "https://api.vencord.dev/",
             "settingsSync": false,
-            "settingsSyncVersion": 1708842356734
+            "settingsSyncVersion": 1711735078770
         }
     },
     "quickCss": ""
