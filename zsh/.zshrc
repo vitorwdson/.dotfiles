@@ -12,10 +12,6 @@ fi
 
 bindkey '^H' backward-kill-word
 
-if [ -n "$VIRTUAL_ENV" ]; then
-    source $VIRTUAL_ENV/bin/activate;
-fi
-
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -38,3 +34,12 @@ export EDITOR=nvim
 alias vim="nvim"
 alias ls='lsd'
 alias lt='ls --tree'
+
+LOCAL_RC_FILE="$HOME/.zshrc.local"
+if [ -f $LOCAL_RC_FILE ]; then
+    source $LOCAL_RC_FILE
+fi
+
+if [ -n "$VIRTUAL_ENV" ]; then
+    source $VIRTUAL_ENV/bin/activate;
+fi
