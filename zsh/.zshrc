@@ -28,7 +28,7 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH="/usr/local/go/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$HOME/go/bin:$HOME/.local/scripts/:$HOME/.local/bin/:$HOME/.fzf/bin:$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$HOME/.local/scripts:$HOME/.local/bin:$HOME/.fzf/bin:$HOME/.cargo/bin:$PATH"
 export EDITOR=nvim 
 
 alias vim="nvim"
