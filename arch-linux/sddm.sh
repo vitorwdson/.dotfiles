@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sudo pacman -S sddm
-yay -S sddm-theme-tokyo-night
+yay -S sddm-theme-tokyo-night-git
 
 sudo mkdir -p /etc/sddm.conf.d
 sudo cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf.d/
