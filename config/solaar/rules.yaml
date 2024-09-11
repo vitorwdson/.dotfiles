@@ -11,11 +11,3 @@
   - Set: [B5FF777A, dpi, 4000]
   - Execute: [notify-send, 'DPI: 4000', -a, Logitec MX Vertical]
 ...
----
-- Rule:
-  - Key: [Back Button, pressed]
-  - MouseClick: [left, 9]
-- Rule:
-  - Key: [Back Button, released]
-  - MouseClick: [left, 9]
-...
