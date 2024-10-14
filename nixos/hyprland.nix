@@ -1,4 +1,7 @@
 { inputs, pkgs, config, username, greeter, ... }:
+let
+  tokyo-night-sddm = pkgs.libsForQt5.callPackage ./pkgs/tokyo-night-sddm.nix { };
+in
 {
   programs.hyprland = {
     enable = true;
@@ -15,8 +18,11 @@
 
   services = {
     displayManager = {
-      sddm.enable = true;
-      sddm.autoNumlock = true;
+      sddm = {
+        enable = true;
+        autoNumlock = true;
+        theme = "tokyo-night-sddm";
+      };
     };
     libinput.enable = true;
     xserver.enable = true;
@@ -43,6 +49,9 @@
     hyprpicker
     playerctl
     pavucontrol
+
+    tokyo-night-sddm
+    dracula-theme
   ];
 
   services.udisks2.enable = true;
