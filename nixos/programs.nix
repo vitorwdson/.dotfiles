@@ -54,6 +54,7 @@
 		cargo
 		gcc
 		luajit
+		protobuf
 		cmake
 		ninja
 		killall
