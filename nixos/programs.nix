@@ -50,7 +50,7 @@
 		wally-cli
 		nodejs
 		go_1_23
-		python3
+		python313
 		cargo
 		gcc
 		luajit
