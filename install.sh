@@ -50,7 +50,9 @@ for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
 
-if [ -f "/etc/arch-release" ]; then
+if [ -d "/etc/nixos" ]; then
+    sudo ln -s $SCRIPT_DIR/nixos/configuration.nix /etc/nixos/configuration.nix
+elif [ -f "/etc/arch-release" ]; then
     echo ""
     read -p "Do you wish to install yay and some core packages? (y/N): " confirm
     echo ""
