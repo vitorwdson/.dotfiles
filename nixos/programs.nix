@@ -28,6 +28,8 @@
 		spotify
 		pamixer
 		keychain
+		libreoffice-qt6-fresh
+		chromium
 
 		gamemode
 		mangohud

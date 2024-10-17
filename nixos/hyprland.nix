@@ -33,7 +33,7 @@ in
     gnome.nautilus
 
     loupe
-    mako
+    swaynotificationcenter
     waybar
     swaylock
     wlogout

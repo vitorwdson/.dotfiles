@@ -32,7 +32,7 @@ tooltip {
 }
 
 #workspaces button label {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 #workspaces button.active {
@@ -52,12 +52,14 @@ tooltip {
 #workspaces button:hover {
   background: #11111b;
   color: #cdd6f4;
+  box-shadow: none;
 }
 
 #custom-power_profile,
 #custom-weather,
 #custom-spotify,
 #custom-powermenu,
+#custom-notification,
 #window,
 #clock,
 #battery,
@@ -168,4 +170,11 @@ tooltip {
 #custom-powermenu:hover {
   background: #11111b;
   color: #cdd6f4;
+}
+
+#custom-notification {
+  font-family: "FiraCode Nerd Font";
+  border-radius: 20px;
+  margin-right: 5px;
+  font-size: 15px;
 }
