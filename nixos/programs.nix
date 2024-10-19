@@ -30,6 +30,7 @@
 		keychain
 		libreoffice-qt6-fresh
 		chromium
+		chromedriver
 
 		gamemode
 		mangohud
@@ -88,7 +89,6 @@
 		unzip
 		variety
 		virt-manager
-		xclip
 		python3Packages.evdev
 		python3Packages.dbus-python
 		gtk3
@@ -109,7 +109,11 @@
 		libliftoff
 		libdisplay-info
 		cpio
-		tomlplusplus curl
+		tomlplusplus
+		xdg-utils
+		desktop-file-utils
+		pkg-config
+		wails
 	];
 
 	fonts.packages = with pkgs; [
