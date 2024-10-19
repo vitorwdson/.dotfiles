@@ -1,5 +1,5 @@
 [pyprland]
-plugins = ["scratchpads"]
+plugins = ["expose", "scratchpads"]
 
 [scratchpads.term]
 animation = "fromTop"
@@ -14,10 +14,9 @@ offset = 0
 [scratchpads.volume]
 animation = "fromRight"
 command = "pavucontrol"
-class = "pavucontrol"
+class = "org.pulseaudio.pavucontrol"
 size = "40% 40%"
 position = "1146px 640px"
 unfocus = "hide"
-lazy = true
 hysteresis = 0
 offset = 0
