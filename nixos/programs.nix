@@ -46,6 +46,7 @@
 		kitty
 		dbeaver-bin
 		postman
+		redis
 
 		curl
 		jq
@@ -163,5 +164,11 @@
 			host    all             all             ::1/128                 md5
 			host    all             all             ::1/128                 scram-sha-256
 		'';
+	};
+
+	# Redis
+	services.redis.servers.main = {
+		enable = true;
+		port = 6379;
 	};
 }
