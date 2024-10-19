@@ -16,6 +16,10 @@ in
   #   ];
   # };
 
+  xdg.mime.defaultApplications = {
+    "inode/directory" = "org.gnome.Nautilus.desktop";
+  };
+
   services = {
     displayManager = {
       sddm = {
@@ -29,14 +33,15 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    gnome.adwaita-icon-theme
-    gnome.nautilus
+    adwaita-icon-theme
+    nautilus
 
     loupe
     swaynotificationcenter
     waybar
     swaylock
     wlogout
+    wofi
     rofi-wayland-unwrapped
     hyprpaper
     udiskie
@@ -49,6 +54,11 @@ in
     hyprpicker
     playerctl
     pavucontrol
+    pyprland
+    hyprshot
+    wl-clipboard
+    cliphist
+    perl538Packages.FileMimeInfo
 
     tokyo-night-sddm
     dracula-theme
