@@ -31,6 +31,8 @@
 		libreoffice-qt6-fresh
 		chromium
 		chromedriver
+		nurl
+		nix-search-cli
 
 		gamemode
 		mangohud
@@ -50,9 +52,11 @@
 
 		curl
 		jq
-		libusb
+		libusb1
 		wally-cli
 		nodejs
+		yarn
+		pnpm
 		go_1_23
 		python313
 		cargo
@@ -120,7 +124,7 @@
 
 	fonts.packages = with pkgs; [
 		noto-fonts
-		noto-fonts-cjk
+		noto-fonts-cjk-sans
 		noto-fonts-emoji
 		liberation_ttf
 		font-awesome
