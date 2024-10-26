@@ -11,6 +11,7 @@
       ./hyprland.nix
       ./programs.nix
       ./rules.nix
+      ./auto-pkgs.nix
     ];
 
   # Use the systemd-boot EFI boot loader.

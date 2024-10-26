@@ -1,0 +1,33 @@
+#! /usr/bin/env bash
+
+if [[ ! -d "/etc/nixos" ]]; then
+    echo "not a nixos system"
+    exit
+fi
+
+config_file=$(readlink -f /etc/nixos/configuration.nix)
+config_dir=$(dirname $config_file)
+nix_install_file="$config_dir/auto-pkgs.nix"
+
+if [[ ! -f "$nix_install_file" ]]; then
+    echo "auto-pkg.nix not found"
+    exit
+fi
+
+tmp_dir="/tmp/nix-install-cache"
+tmp_file="$tmp_dir/nix-install.nix"
+
+mkdir -p $tmp_dir
+cp $nix_install_file $tmp_file
+
+pkgs="$@"
+sed -i -e "s/\\(    # AUTO-INSTALL\\)/\\1\n    $pkgs/" $nix_install_file
+
+sudo nixos-rebuild switch
+if [[ "$?" -ne "0" ]]; then 
+    cp $tmp_file $nix_install_file
+    echo "reverted nix-install.nix"
+    exit
+fi
+
+echo "packages installed succesfully"
