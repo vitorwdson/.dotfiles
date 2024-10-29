@@ -30,4 +30,10 @@ if [[ "$?" -ne "0" ]]; then
     exit
 fi
 
+git_dir="$config_dir/.."
+if [[ -d "$git_dir/.git" ]]; then
+    git -C "$git_dir" add "$nix_install_file"
+    git -C "$git_dir" commit -m "nix-install: added $pkgs [AUTO]"
+fi
+
 echo "packages installed succesfully"
