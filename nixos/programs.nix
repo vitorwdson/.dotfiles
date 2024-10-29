@@ -59,6 +59,8 @@
 		pnpm
 		go_1_23
 		python313
+		jdk
+		jdk17
 		cargo
 		gcc
 		luajit
@@ -120,6 +122,7 @@
 		pkg-config
 		wails
 		transmission_4-gtk
+		prismlauncher
 	];
 
 	fonts.packages = with pkgs; [
