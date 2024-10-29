@@ -2,5 +2,6 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    obs-studio
   ];
 }
