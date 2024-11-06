@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    parallel bat bat-extras.batman
     tealdeer
     bc
     dracula-theme
