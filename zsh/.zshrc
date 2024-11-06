@@ -24,6 +24,7 @@ source $ZSH/oh-my-zsh.sh
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 source <(fzf --zsh)
+eval "$(batman --export-env)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
