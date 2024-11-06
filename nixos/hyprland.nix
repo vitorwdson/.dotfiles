@@ -1,6 +1,7 @@
 { inputs, pkgs, config, username, greeter, ... }:
 let
   tokyo-night-sddm = pkgs.libsForQt5.callPackage ./pkgs/tokyo-night-sddm.nix { };
+  stable = import <nixos-stable> { config = { allowUnfree = true; }; };
 in
 {
   programs.hyprland = {
@@ -54,7 +55,7 @@ in
     hyprpicker
     playerctl
     pavucontrol
-    pyprland
+    stable.pyprland
     hyprshot
     wl-clipboard
     cliphist
