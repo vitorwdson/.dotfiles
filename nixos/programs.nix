@@ -35,6 +35,7 @@
 		nix-search-cli
 
 		gamemode
+		gamescope
 		mangohud
 		ripgrep
 		heroic
