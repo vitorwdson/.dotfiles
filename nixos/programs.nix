@@ -69,10 +69,8 @@
 		ninja
 		killall
 		libjpeg
-		bazecor
 		elinks
 		feh
-		fuse-common
 		gimp
 		gnugrep
 		gnumake
