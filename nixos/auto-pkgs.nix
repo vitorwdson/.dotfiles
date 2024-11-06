@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    foot
     parallel bat bat-extras.batman
     tealdeer
     bc
