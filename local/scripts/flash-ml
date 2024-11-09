@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 if [ -f ~/moonlander-firmware.bin ]; then
    rm ~/moonlander-firmware.bin
