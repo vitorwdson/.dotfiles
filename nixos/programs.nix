@@ -178,4 +178,7 @@
 		enable = true;
 		port = 6379;
 	};
+
+	# Waidroid
+	virtualisation.waydroid.enable = true;
 }
