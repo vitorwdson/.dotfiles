@@ -1,4 +1,7 @@
 { inputs, pkgs, config, username, greeter, ... }:
+let
+  prismlauncher-cracked = pkgs.callPackage ./pkgs/prismlauncher-cracked.nix { };
+in
 {
 	nixpkgs = {
 		config = {
@@ -121,7 +124,7 @@
 		pkg-config
 		wails
 		transmission_4-gtk
-		prismlauncher
+		prismlauncher-cracked
 	];
 
 	fonts.packages = with pkgs; [
