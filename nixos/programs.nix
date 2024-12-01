@@ -161,6 +161,7 @@ in
 	# Postgres
 	services.postgresql = {
 		enable = true;
+		package = pkgs.postgresql_17;
 		ensureDatabases = [];
 		authentication = pkgs.lib.mkOverride 10 ''
 			# TYPE  DATABASE        USER            ADDRESS                 METHOD
