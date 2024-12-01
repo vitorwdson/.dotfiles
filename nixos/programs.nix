@@ -135,7 +135,8 @@ in
 		font-awesome
 		powerline-fonts
 		powerline-symbols
-		(nerdfonts.override { fonts = [ "FiraCode" "NerdFontsSymbolsOnly" ]; })
+		nerd-fonts.fira-code
+		nerd-fonts.symbols-only
 	];
 	fonts.fontconfig = {
 		defaultFonts = {
