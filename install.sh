@@ -50,6 +50,8 @@ for f in "${locals[@]}"; do
     install_config "$f" ".local/"
 done
 
+install_config "$SCRIPT_DIR/.tmux-sessionizer" ""
+
 if [ -d "/etc/nixos" ]; then
     sudo ln -s $SCRIPT_DIR/nixos/configuration.nix /etc/nixos/configuration.nix
 elif [ -f "/etc/arch-release" ]; then
