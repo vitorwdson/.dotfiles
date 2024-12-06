@@ -42,6 +42,6 @@ if [ -f $LOCAL_RC_FILE ]; then
     source $LOCAL_RC_FILE
 fi
 
-if [ -n "$VIRTUAL_ENV" ]; then
-    source $VIRTUAL_ENV/bin/activate;
+if [ -n "$PY_VENV" ]; then
+    source $PY_VENV/bin/activate;
 fi

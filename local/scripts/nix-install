@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 if [[ ! -d "/etc/nixos" ]]; then
     echo "not a nixos system"
