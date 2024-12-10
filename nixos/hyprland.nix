@@ -7,6 +7,7 @@ in
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    withUWSM  = true;
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -28,6 +29,7 @@ in
         autoNumlock = true;
         theme = "tokyo-night-sddm";
       };
+      defaultSession = "hyprland-uwsm";
     };
     libinput.enable = true;
     xserver.enable = true;
