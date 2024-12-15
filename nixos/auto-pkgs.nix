@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    yt-dlp
     komikku
     foot
     parallel bat bat-extras.batman
