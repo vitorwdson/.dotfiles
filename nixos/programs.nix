@@ -186,4 +186,13 @@ in
 
 	# Waidroid
 	virtualisation.waydroid.enable = true;
+
+	# Docker
+	virtualisation.docker = {
+		enable = true;
+		members = [ "vitorwdson" ];
+		daemon.settings = {
+			data-root = "/home/docker/";
+		};
+	};
 }
