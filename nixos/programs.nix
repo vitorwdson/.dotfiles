@@ -190,7 +190,6 @@ in
 	# Docker
 	virtualisation.docker = {
 		enable = true;
-		members = [ "vitorwdson" ];
 		daemon.settings = {
 			data-root = "/home/docker/";
 		};
