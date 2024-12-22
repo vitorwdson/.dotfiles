@@ -62,7 +62,7 @@ in
 		yarn
 		pnpm
 		go_1_23
-		python313
+		python313Full
 		jdk
 		jdk17
 		cargo
