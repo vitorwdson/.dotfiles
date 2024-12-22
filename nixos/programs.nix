@@ -67,8 +67,7 @@ in
 		jdk17
 		cargo
 		gcc
-		luajit
-		protobuf
+		lua51Packages.lua
 		cmake
 		ninja
 		killall
@@ -125,6 +124,34 @@ in
 		wails
 		transmission_4-gtk
 		prismlauncher-cracked
+
+		# Dev stuff
+		air
+		gopls
+		templ
+		gofumpt
+		golines
+		gotools
+		buf
+		gomodifytags
+		goose
+		protobuf
+		protoc-gen-connect-go
+		protoc-gen-go
+		sqlc
+		pyright
+		ruff
+		djlint
+		emmet-language-server
+		lua-language-server
+		marksman
+		taplo
+		tailwindcss-language-server
+		prettierd
+		htmx-lsp
+		sql-formatter
+		sqls
+		typescript-language-server
 	];
 
 	fonts.packages = with pkgs; [
