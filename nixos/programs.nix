@@ -1,6 +1,7 @@
 { inputs, pkgs, config, username, greeter, ... }:
 let
   prismlauncher-cracked = pkgs.callPackage ./pkgs/prismlauncher-cracked.nix { };
+  stable = import <nixos-stable> { config = { allowUnfree = true; }; };
 in
 {
 	nixpkgs = {
@@ -41,7 +42,7 @@ in
 		gamescope
 		mangohud
 		ripgrep
-		heroic
+		stable.heroic
 		lutris
 		wine
 		winetricks
