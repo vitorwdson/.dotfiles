@@ -57,7 +57,7 @@ in
     hyprpicker
     playerctl
     pavucontrol
-    stable.pyprland
+    pyprland
     hyprshot
     wl-clipboard
     cliphist
