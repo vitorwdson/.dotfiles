@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    virtualboxKvm
     corectrl
     yt-dlp
     komikku
