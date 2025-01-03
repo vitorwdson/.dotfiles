@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    vulkan-tools virtualgl
     virtualboxKvm
     corectrl
     yt-dlp
