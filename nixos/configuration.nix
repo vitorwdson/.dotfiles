@@ -61,7 +61,7 @@
   services.printing.enable = true;
 
   # Enable sound.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   # OR
   services.pipewire = {
     enable = true;
