@@ -8,7 +8,7 @@
     yt-dlp
     komikku
     foot
-    parallel bat bat-extras.batman
+    parallel bat
     tealdeer
     bc
     dracula-theme
