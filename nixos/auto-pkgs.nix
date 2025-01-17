@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    lshw
     vulkan-tools virtualgl
     virtualboxKvm
     corectrl
