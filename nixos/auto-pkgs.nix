@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    amdgpu_top
     lshw
     vulkan-tools virtualgl
     virtualboxKvm
