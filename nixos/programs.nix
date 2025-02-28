@@ -222,4 +222,10 @@ in
 			data-root = "/home/docker/";
 		};
 	};
+
+	# VMs
+	virtualisation.libvirtd.enable = true;
+	programs.virt-manager.enable = true;
+	users.groups.libvirtd.members = ["vitorwdson"];
+	virtualisation.spiceUSBRedirection.enable = true;
 }

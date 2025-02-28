@@ -52,7 +52,7 @@ in
     slurp
     pipewire
     wireplumber
-    xwaylandvideobridge
+    kdePackages.xwaylandvideobridge
     xwayland
     hyprpicker
     playerctl
@@ -62,6 +62,7 @@ in
     wl-clipboard
     cliphist
     perl538Packages.FileMimeInfo
+    hyprpolkitagent
 
     tokyo-night-sddm
     dracula-theme
