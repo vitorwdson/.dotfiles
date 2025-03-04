@@ -2,6 +2,8 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    ffmpeg
+    ffmpeg
     virtiofsd
     swtpm
     bottles
