@@ -2,8 +2,8 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
-    ffmpeg
-    ffmpeg
+    kdePackages.kdenlive
+    ffmpeg-full
     virtiofsd
     swtpm
     bottles
