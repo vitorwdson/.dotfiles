@@ -1,9 +1,8 @@
 { inputs, pkgs, config, username, greeter, ... }:
 let
-  prismlauncher-cracked = pkgs.callPackage ./pkgs/prismlauncher-cracked.nix { };
-  stable = import <nixos-stable> { config = { allowUnfree = true; }; };
+	stable = import <nixos-stable> { config = { allowUnfree = true; }; };
 in
-{
+	{
 	nixpkgs = {
 		config = {
 			allowUnfree = true;
@@ -124,7 +123,7 @@ in
 		pkg-config
 		wails
 		transmission_4-gtk
-		prismlauncher-cracked
+		prismlauncher
 
 		# Dev stuff
 		air
@@ -179,7 +178,7 @@ in
 	programs.steam = {
 		enable = true;
 		remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-			dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+		dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
 	};
 
 	# Zsh
