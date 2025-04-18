@@ -36,6 +36,7 @@ in
 		chromedriver
 		nurl
 		nix-search-cli
+		direnv
 
 		gamemode
 		gamescope
@@ -63,6 +64,7 @@ in
 		pnpm
 		go_1_23
 		python313Full
+		uv
 		jdk
 		jdk17
 		cargo
@@ -227,4 +229,7 @@ in
 	programs.virt-manager.enable = true;
 	users.groups.libvirtd.members = ["vitorwdson"];
 	virtualisation.spiceUSBRedirection.enable = true;
+
+	# Lorri
+	services.lorri.enable = true;
 }

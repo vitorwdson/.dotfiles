@@ -31,6 +31,7 @@ source <(fzf --zsh)
 export PATH="/usr/local/go/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/go/bin:$HOME/.local/scripts:$HOME/.local/bin:$HOME/.fzf/bin:$HOME/.cargo/bin:$PATH"
 export EDITOR=nvim 
+export UV_PROJECT_ENVIRONMENT=venv
 
 alias vim="nvim"
 alias ls='lsd'
@@ -44,3 +45,5 @@ fi
 if [ -n "$PY_VENV" ]; then
     source $PY_VENV/bin/activate;
 fi
+
+eval "$(direnv hook zsh)"
