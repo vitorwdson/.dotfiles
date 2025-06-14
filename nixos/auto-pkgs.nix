@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    clamav
     kdePackages.kdenlive
     ffmpeg-full
     virtiofsd
