@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    ftb-app
     clamav
     kdePackages.kdenlive
     ffmpeg-full
