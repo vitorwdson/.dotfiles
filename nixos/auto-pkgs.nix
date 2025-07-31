@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    nss
     ftb-app
     clamav
     kdePackages.kdenlive
