@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    nodePackages.js-beautify stylua
     vscode-langservers-extracted
     nss
     ftb-app
