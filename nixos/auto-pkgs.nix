@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    tree-sitter
     biome
     nodePackages.js-beautify stylua
     vscode-langservers-extracted
