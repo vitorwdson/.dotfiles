@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    vscode-langservers-extracted
     nss
     ftb-app
     clamav
