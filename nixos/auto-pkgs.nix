@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    basedpyright
     tree-sitter
     biome
     nodePackages.js-beautify stylua
