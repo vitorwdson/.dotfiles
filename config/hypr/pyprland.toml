@@ -1,5 +1,5 @@
 [pyprland]
-plugins = ["expose", "scratchpads"]
+plugins = ["scratchpads"]
 
 [scratchpads.term]
 animation = "fromTop"
