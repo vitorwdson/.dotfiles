@@ -9,7 +9,6 @@
     vscode-langservers-extracted
     nss
     ftb-app
-    clamav
     kdePackages.kdenlive
     ffmpeg-full
     virtiofsd
