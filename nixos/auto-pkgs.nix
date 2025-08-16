@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    xclicker
     lazygit
     basedpyright
     tree-sitter
