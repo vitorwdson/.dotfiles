@@ -2,7 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
-    ydotool
+    mpv
     xclicker
     lazygit
     basedpyright
