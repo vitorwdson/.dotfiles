@@ -2,7 +2,6 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
-    input-leap
     mpv
     xclicker
     lazygit
