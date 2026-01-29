@@ -62,11 +62,12 @@ in
 		nodejs
 		yarn
 		pnpm
-		go_1_23
-		python313Full
+		go_1_25
+		python314
 		uv
 		jdk
 		jdk17
+		javaPackages.compiler.openjdk25
 		cargo
 		gcc
 		lua51Packages.lua
@@ -108,7 +109,7 @@ in
 		python3Packages.pyyaml
 		python3Packages.xlib
 		librsvg
-		wrapGAppsHook
+		wrapGAppsHook3
 		gdb
 		pixman
 		cairo
@@ -154,12 +155,14 @@ in
 		sql-formatter
 		sqls
 		typescript-language-server
+		jdt-language-server
+		gradle
 	];
 
 	fonts.packages = with pkgs; [
 		noto-fonts
 		noto-fonts-cjk-sans
-		noto-fonts-emoji
+		noto-fonts-color-emoji
 		liberation_ttf
 		font-awesome
 		powerline-fonts
@@ -232,4 +235,7 @@ in
 
 	# Lorri
 	services.lorri.enable = true;
+
+	# Ydotool
+	programs.ydotool.enable = true;
 }

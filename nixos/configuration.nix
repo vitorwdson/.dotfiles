@@ -12,6 +12,7 @@
       ./programs.nix
       ./rules.nix
       ./auto-pkgs.nix
+      ./samba.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -74,7 +75,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.vitorwdson = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "ydotool" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
     ];
   };
