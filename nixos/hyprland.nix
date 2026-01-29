@@ -45,14 +45,13 @@ in
     swaylock
     wlogout
     wofi
-    rofi-wayland-unwrapped
+    rofi-unwrapped
     hyprpaper
     udiskie
     grim
     slurp
     pipewire
     wireplumber
-    kdePackages.xwaylandvideobridge
     xwayland
     hyprpicker
     playerctl
