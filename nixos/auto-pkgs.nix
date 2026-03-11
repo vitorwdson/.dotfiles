@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    file
     cairo
     melonDS
     mgba
