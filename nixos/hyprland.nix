@@ -60,8 +60,9 @@ in
     hyprshot
     wl-clipboard
     cliphist
-    perl538Packages.FileMimeInfo
+    perl5Packages.FileMimeInfo
     hyprpolkitagent
+    networkmanagerapplet
 
     tokyo-night-sddm
     dracula-theme

@@ -93,7 +93,8 @@
         "format-ethernet": " Wired",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
+        "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}",
+        "on-click": "nm-applet"
     },
     "cpu": {
         "interval": 10,

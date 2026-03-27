@@ -21,7 +21,7 @@ in
 		unzip
 		vlc
 		wireplumber
-		neofetch
+		fastfetch
 		w3m
 		bat
 		socat
