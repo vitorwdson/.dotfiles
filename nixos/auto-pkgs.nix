@@ -2,10 +2,11 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    lsof
     opencode
     file
     cairo
-    melonDS
+    melonds
     mgba
     mpv
     xclicker
@@ -13,7 +14,8 @@
     basedpyright
     tree-sitter
     biome
-    nodePackages.js-beautify stylua
+    js-beautify
+    stylua
     vscode-langservers-extracted
     nss
     ftb-app
