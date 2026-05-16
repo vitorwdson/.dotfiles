@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    libxml2 libxslt
     lsof
     opencode
     file
@@ -23,7 +24,7 @@
     ffmpeg-full
     virtiofsd
     swtpm
-    bottles
+    # bottles
     rar
     rustup
     amdgpu_top
