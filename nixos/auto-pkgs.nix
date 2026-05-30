@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    guitarix
     kdePackages.kde-cli-tools
     libxml2 libxslt
     lsof
