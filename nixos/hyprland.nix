@@ -11,15 +11,8 @@ in
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = with pkgs; [
-  #     xdg-desktop-portal-gtk
-  #   ];
-  # };
-
   xdg.mime.defaultApplications = {
-    "inode/directory" = "org.gnome.Nautilus.desktop";
+    "inode/directory" = "org.kde.dolphin.desktop";
   };
 
   services = {
@@ -37,7 +30,10 @@ in
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
-    nautilus
+    kdePackages.dolphin
+    kdePackages.kservice
+    xdg-utils
+    shared-mime-info
 
     loupe
     swaynotificationcenter
@@ -50,8 +46,6 @@ in
     udiskie
     grim
     slurp
-    pipewire
-    wireplumber
     xwayland
     hyprpicker
     playerctl
@@ -65,7 +59,6 @@ in
     networkmanagerapplet
 
     tokyo-night-sddm
-    dracula-theme
   ];
 
   services.udisks2.enable = true;

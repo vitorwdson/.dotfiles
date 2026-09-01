@@ -31,7 +31,7 @@ in
 		spotify
 		pamixer
 		keychain
-		libreoffice-qt6-fresh
+		# libreoffice-qt6-fresh
 		chromium
 		chromedriver
 		nurl
@@ -42,8 +42,8 @@ in
 		gamescope
 		mangohud
 		ripgrep
-		stable.heroic
-		lutris
+		# stable.heroic
+		# lutris
 		wine
 		winetricks
 
@@ -68,14 +68,14 @@ in
 		jdk
 		jdk17
 		javaPackages.compiler.openjdk25
-		cargo
+		# cargo
 		gcc
 		lua51Packages.lua
 		cmake
 		ninja
 		killall
 		libjpeg
-		elinks
+		# elinks
 		feh
 		gimp
 		gnugrep
@@ -121,7 +121,6 @@ in
 		libdisplay-info
 		cpio
 		tomlplusplus
-		xdg-utils
 		desktop-file-utils
 		pkg-config
 		wails
@@ -157,6 +156,8 @@ in
 		typescript-language-server
 		jdt-language-server
 		gradle
+		# zig
+		zls
 	];
 
 	fonts.packages = with pkgs; [
@@ -238,4 +239,11 @@ in
 
 	# Ydotool
 	programs.ydotool.enable = true;
+
+	# AppImage support
+	programs.appimage = {
+		enable = true;
+		binfmt = true;
+	};
+	security.unprivilegedUsernsClone = true;
 }

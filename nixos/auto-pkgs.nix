@@ -41,8 +41,7 @@
     parallel bat
     tealdeer
     bc
-    dracula-theme
     nwg-look
-    obs-studio
+    # obs-studio
   ];
 }

@@ -13,16 +13,46 @@
       ./rules.nix
       ./auto-pkgs.nix
       ./samba.nix
+      ./audio.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+
+  # Use the GRUB 2 boot loader.
+  boot.loader = {
+    timeout = 10;
+
+    efi = {
+      efiSysMountPoint = "/boot";
+    };
+
+    grub = {
+      enable = true;
+      efiSupport = true;
+      efiInstallAsRemovable = true; # Otherwise /boot/EFI/BOOT/BOOTX64.EFI isn't generated
+      devices = ["nodev"];
+      useOSProber = true;
+      extraEntriesBeforeNixOS = false;
+      extraEntries = ''
+        menuentry "Reboot" {
+          reboot
+        }
+        menuentry "Poweroff" {
+          halt
+        }
+      '';
+    };
+  };
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.plugins = [
+    pkgs.networkmanager-openvpn
+  ];
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [];
@@ -61,21 +91,13 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound.
-  services.pulseaudio.enable = false;
-  # OR
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.vitorwdson = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "ydotool" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "ydotool" ];
     packages = with pkgs; [
     ];
   };
