@@ -245,5 +245,7 @@ in
 		enable = true;
 		binfmt = true;
 	};
-	security.unprivilegedUsernsClone = true;
+	# Replacement for the removed security.unprivilegedUsernsClone option;
+	# > 0 enables unprivileged user namespaces (needed by AppImage runtimes).
+	boot.kernel.sysctl."user.max_user_namespaces" = 65536;
 }

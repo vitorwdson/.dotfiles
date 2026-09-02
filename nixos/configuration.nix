@@ -5,6 +5,17 @@
 { config, lib, pkgs, ... }:
 
 {
+  # Backport Hyprland 0.55+ Lua dispatch protocol support to waybar 0.15.0
+  # (fixes workspace click/scroll on the workspaces module).
+  # TODO: remove once nixpkgs ships a waybar release with this fix.
+  nixpkgs.overlays = [
+    (final: prev: {
+      waybar = prev.waybar.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [ ./waybar-lua-dispatch.patch ];
+      });
+    })
+  ];
+
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
