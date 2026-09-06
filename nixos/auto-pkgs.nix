@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    obs-studio
     cloudflared
     discord
     kdePackages.kde-cli-tools
