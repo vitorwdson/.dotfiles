@@ -46,6 +46,8 @@ in
 		# lutris
 		wine
 		winetricks
+		prismlauncher
+		mcaselector
 
 		neovim
 		wget
@@ -125,7 +127,6 @@ in
 		pkg-config
 		wails
 		transmission_4-gtk
-		prismlauncher
 
 		# Dev stuff
 		air
