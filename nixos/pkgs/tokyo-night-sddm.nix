@@ -10,7 +10,7 @@
 stdenvNoCC.mkDerivation
 rec {
   pname = "tokyo-night-sddm";
-  version = "1..0";
+  version = "1.0";
   src = fetchFromGitHub {
 	owner = "siddrs";
 	repo = "tokyo-night-sddm";
@@ -31,6 +31,8 @@ rec {
   installPhase = ''
 	mkdir -p $out/share/sddm/themes
 	sed -i 's@Background="Backgrounds/win11.png"@Background="Backgrounds/shacks.png"@' $PWD/theme.conf
+	sed -i 's@^Type=sddm-theme@&\nQtVersion=6@' $PWD/metadata.desktop
+	sed -i 's@import QtGraphicalEffects@import Qt5Compat.GraphicalEffects@' $PWD/Main.qml $PWD/Components/*.qml
 	cp -aR $PWD $out/share/sddm/themes/tokyo-night-sddm
 	'';
 }

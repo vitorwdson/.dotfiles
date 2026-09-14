@@ -21,6 +21,7 @@ in
         enable = true;
         autoNumlock = true;
         theme = "tokyo-night-sddm";
+        extraPackages = [ pkgs.kdePackages.qt5compat ];
       };
       defaultSession = "hyprland-uwsm";
     };
