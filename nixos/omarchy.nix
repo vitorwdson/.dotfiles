@@ -14,6 +14,8 @@
 let
   # ttfx (terminal text effects, used by the screensaver) — not in nixpkgs.
   ttfx = pkgs.callPackage ./pkgs/ttfx.nix { };
+  # aether (image -> theme GUI) — not in nixpkgs.
+  aether = pkgs.callPackage ./pkgs/aether.nix { };
 in
 {
   # Fold the WebP/JPEG2000/etc. image-format plugins into quickshell's Qt
@@ -43,6 +45,7 @@ in
     glib # gsettings (GTK theme + color-scheme retint)
 
     ttfx # terminal text effects, used by the omarchy screensaver
+    aether # image -> Omarchy theme GUI
 
     # Compositor utilities used by the shell and omarchy scripts
     hyprland # hyprctl scripting, monitor watch/focus helpers
