@@ -10,8 +10,10 @@
   gtk3,
   webkitgtk_4_1,
   glib,
+  glib-networking,
   gdk-pixbuf,
   libsoup_3,
+  gst_all_1,
 }:
 
 let
@@ -45,5 +47,10 @@ runCommand "aether-${version}"
     makeWrapper "$out/bin/.aether-unwrapped" "$out/bin/aether" \
       --prefix LD_LIBRARY_PATH : "${runtimeLibs}" \
       --prefix XDG_DATA_DIRS : "$out/share:${gtk3}/share:${glib}/share" \
-      --set GIO_MODULE_DIR "${webkitgtk_4_1}/lib/gio/modules"
+      --set GIO_MODULE_DIR "${glib-networking}/lib/gio/modules" \
+      --set GST_PLUGIN_SYSTEM_PATH "${lib.concatStringsSep ":" (map (p: "${p}/lib/gstreamer-1.0") [
+        gst_all_1.gst-plugins-base
+        gst_all_1.gst-plugins-good
+        gst_all_1.gst-plugins-bad
+      ])}"
   ''
