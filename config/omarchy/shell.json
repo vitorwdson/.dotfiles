@@ -44,6 +44,15 @@
       ],
       "right": [
         {
+          "id": "omarchy.tray"
+        },
+        {
+          "id": "omarchy.agents"
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
           "id": "omarchy.notifications-center",
           "type": "command",
           "text": "",
@@ -53,15 +62,6 @@
           "exec": "printf '{\"text\":\"\\uF0F3\",\"class\":\"%s\"}' $([ \"$(swaync-client -D)\" = true ] && echo active || echo inactive)",
           "onClick": "swaync-client -t -sw",
           "onRightClick": "swaync-client -d"
-        },
-        {
-          "id": "omarchy.tray"
-        },
-        {
-          "id": "omarchy.agents"
-        },
-        {
-          "id": "omarchy.bluetooth"
         },
         {
           "id": "omarchy.network"
