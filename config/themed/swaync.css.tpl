@@ -209,36 +209,44 @@
 }
 
 .notification-group {
-  /* Styling only for Grouped Notifications */
+  /* Group container: a subtle translucent card behind the header + rows.
+     Nested .notification-background keeps its own translucent fill, so the
+     group layer provides the padding/border/frame rather than flat fill. */
+  background-color: @noti-bg;
+  border: 1px solid @noti-border-color;
+  border-radius: 12px;
+  padding: 4px;
+  margin: 6px 2px;
 }
 
 .notification-group.low {
-  /* Low Priority Group */
 }
 
 .notification-group.normal {
-  /* Low Priority Group */
 }
 
 .notification-group.critical {
-  /* Low Priority Group */
 }
 
 .notification-group .notification-group-buttons, .notification-group .notification-group-headers {
-  margin: 0 16px;
+  margin: 4px 10px;
   color: @text-color;
 }
 
 .notification-group .notification-group-headers {
   /* Notification Group Headers */
+  padding: 2px 4px;
 }
 
 .notification-group .notification-group-headers .notification-group-icon {
   color: @text-color;
+  -gtk-icon-transform: scale(0.75);
 }
 
 .notification-group .notification-group-headers .notification-group-header {
   color: @text-color;
+  font-size: 11px;
+  font-weight: bold;
 }
 
 .notification-group .notification-group-buttons {
