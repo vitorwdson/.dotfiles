@@ -13,6 +13,7 @@
   border: 1px solid {{ mix muted darker_background 60% }};
   border-radius: 16px;
   color: {{ foreground }};
+  padding: 8px;
 }
 
 .close-button {
@@ -50,11 +51,11 @@
   color: {{ foreground }};
 }
 
-.notification-content .app-name { color: {{ muted }}; font-weight: bold; }
+.notification-content .app-name { color: {{ bright_foreground }}; font-weight: 700; }
 .notification-content .summary { color: {{ foreground }}; font-weight: 600; }
-.notification-content .not-region { color: {{ muted }}; }
+.notification-content .not-region { color: {{ dark_foreground }}; }
 .notification-content .body { color: {{ foreground }}; }
-.notification-content .time { color: {{ muted }}; }
+.notification-content .time { color: {{ dark_foreground }}; }
 
 .notification-action {
   background-color: {{ mix muted darker_background 55% }};
@@ -67,7 +68,7 @@
 .notification-action:hover { background-color: {{ accent }}; }
 
 .widget-title {
-  color: {{ muted }};
+  color: {{ dark_foreground }};
   font-size: 13px;
   font-weight: bold;
   margin: 6px 10px 2px;
@@ -80,7 +81,7 @@
   background: {{ mix muted darker_background 55% }};
 }
 
-.widget-dnd { color: {{ muted }}; margin: 4px 10px; }
+.widget-dnd { color: {{ dark_foreground }}; margin: 4px 10px; }
 
-.view { background: transparent; }
+.view { background: transparent; margin: 4px 2px; }
 scrollbar { background: transparent; }
