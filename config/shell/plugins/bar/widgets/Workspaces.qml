@@ -74,9 +74,12 @@ BarWidget {
         text: root.icons[modelData] !== undefined ? root.icons[modelData] : (modelData === 10 ? "0" : String(modelData))
         active: focused
         opacity: occupied || focused ? 1 : 0.5
+        fontSize: root.icons[modelData] !== undefined
+          ? Style.bar.iconFont
+          : Math.round(Style.bar.iconFont * 0.8)
         horizontalMargin: 6
         verticalPadding: 6
-        fixedWidth: root.vertical ? root.barSize : Style.space(20)
+        fixedWidth: root.vertical ? root.barSize : Style.bar.iconSlot
         fixedHeight: root.barSize
         onPressed: function() { root.focusWorkspace(modelData) }
         // Parity with the old waybar config: scroll switches to the previous

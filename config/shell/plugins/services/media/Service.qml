@@ -38,6 +38,14 @@ Item {
     return MediaModel.isProxyPlayer(player)
   }
 
+  function isPriorityPlayer(player) {
+    return MediaModel.isPriorityPlayer(player)
+  }
+
+  function playerIcon(player) {
+    return MediaModel.playerIcon(player)
+  }
+
   function hasMetadata(player) {
     return MediaModel.hasMetadata(player)
   }
@@ -137,6 +145,7 @@ Item {
 
     list.sort(function(a, b) {
       if (!!a.isPlaying !== !!b.isPlaying) return a.isPlaying ? -1 : 1
+      if (isPriorityPlayer(a) !== isPriorityPlayer(b)) return isPriorityPlayer(a) ? -1 : 1
       if (isProxyPlayer(a) !== isProxyPlayer(b)) return isProxyPlayer(a) ? 1 : -1
       if (a.isPlaying && b.isPlaying) {
         var orderDelta = playerOrder(a, 1000) - playerOrder(b, 1000)
@@ -164,8 +173,9 @@ Item {
   }
 
   function oldestPlayingPlayer(requirePlaybackStream) {
-    var oldest = null
-    var oldestOrder = 0
+    var best = null
+    var bestOrder = 0
+    var bestPriority = false
     var playingProxy = null
     var proxyOrder = 0
 
@@ -178,17 +188,25 @@ Item {
         if (requirePlaybackStream && !playerHasPlaybackStream(p)) continue
 
         var order = playerOrder(p, i + 1000)
-        if (!proxyPlayer && (!oldest || order < oldestOrder)) {
-          oldest = p
-          oldestOrder = order
-        } else if (proxyPlayer && (!playingProxy || order < proxyOrder)) {
-          playingProxy = p
-          proxyOrder = order
+        var priority = !proxyPlayer && isPriorityPlayer(p)
+        var wins = best === null
+          || (priority && !bestPriority)
+          || (priority === bestPriority && order < bestOrder)
+
+        if (proxyPlayer) {
+          if (!playingProxy || order < proxyOrder) {
+            playingProxy = p
+            proxyOrder = order
+          }
+        } else if (wins) {
+          best = p
+          bestOrder = order
+          bestPriority = priority
         }
       }
     }
 
-    return oldest || playingProxy || null
+    return best || playingProxy || null
   }
 
   function selectActivePlayer() {
@@ -201,6 +219,7 @@ Item {
     var controllableProxy = null
     var identityPlayer = null
     var identityProxy = null
+    var priorityPlayer = null
 
     for (var i = 0; i < players.length; i++) {
       var p = players[i]
@@ -209,6 +228,11 @@ Item {
       var proxy = isProxyPlayer(p)
 
       if (preferredPlayerKey && playerKey(p) === preferredPlayerKey && hasMetadata(p)) preferred = p
+
+      // Priority player (Spotify): claim the widget whenever it has a track
+      // loaded, playing or paused. Beats every automatic selection but stays
+      // under the sticky manual `preferredPlayerKey` override.
+      if (!priorityPlayer && !proxy && hasTrackMetadata(p) && isPriorityPlayer(p)) priorityPlayer = p
 
       if (playerHasPlaybackStream(p)) {
         if (!proxy && !streamPlayer) streamPlayer = p
@@ -228,7 +252,7 @@ Item {
     if (preferred && preferred.isPlaying) return preferred
     var streamCandidate = streamPlayer || streamProxy
     var streamPreferred = preferred && playerHasPlaybackStream(preferred) ? preferred : null
-    return oldestPlayingPlayer(true) || oldestPlayingPlayer(false) || streamPreferred || streamCandidate || preferred || trackPlayer || trackProxy || controllablePlayer || controllableProxy || identityPlayer || identityProxy || null
+    return priorityPlayer || oldestPlayingPlayer(true) || oldestPlayingPlayer(false) || streamPreferred || streamCandidate || preferred || trackPlayer || trackProxy || controllablePlayer || controllableProxy || identityPlayer || identityProxy || null
   }
 
   function labelFor(player) {

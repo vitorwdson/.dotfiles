@@ -237,7 +237,7 @@ BarWidget {
     anchors.fill: parent
     bar: root.bar
     text: root.layoutLabel
-    fontSize: Style.font.caption
+    fontSize: Style.bar.iconFont
     horizontalMargin: 6
     tooltipText: root.layoutFull
     onPressed: function() { root.cycleLayout() }

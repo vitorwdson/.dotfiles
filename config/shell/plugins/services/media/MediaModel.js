@@ -4,6 +4,54 @@ function isProxyPlayer(player) {
   return dbusName.indexOf("playerctld") !== -1 || desktopEntry === "playerctld"
 }
 
+// MPRIS players that win player selection whenever they have a track
+// loaded, playing or paused (mirrors the old waybar's dedicated Spotify
+// module). Manual selection via the popup's source list still overrides.
+var priorityIdentities = ["spotify"]
+
+// Bar widget glyph per player, matched by dbus name/identity/desktop entry.
+// Anything unmatched falls back to a generic music note.
+var playerIcons = [
+  ["spotify", "\uF1BC"],           // 󰁾 nf-fa-spotify
+  ["firefox", "\uF269"],           // 󰊙 nf-fa-firefox
+  ["chromium", "\uF268"],          // 󰊈 nf-fa-chrome
+  ["chrome", "\uF268"],
+  ["brave", "\uF268"],
+  ["mpv", "\uF036"],               // 󱕼 nf-fa-play-circle
+]
+
+function playerIcon(player) {
+  var dbusName = String(player && player.dbusName || "").toLowerCase()
+  var identity = String(player && player.identity || "").toLowerCase()
+  var desktopEntry = String(player && player.desktopEntry || "").toLowerCase()
+  var token = ""
+  var i = 0
+
+  for (i = 0; i < playerIcons.length; i++) {
+    token = String(playerIcons[i][0]).toLowerCase()
+    if (!token) continue
+    if (dbusName.indexOf(token) !== -1 || identity.indexOf(token) !== -1 || desktopEntry.indexOf(token) !== -1) return playerIcons[i][1]
+  }
+
+  return "\uDB80\uFD5A" // 󰝚 nf-md-music
+}
+
+function isPriorityPlayer(player) {
+  var dbusName = String(player && player.dbusName || "").toLowerCase()
+  var identity = String(player && player.identity || "").toLowerCase()
+  var desktopEntry = String(player && player.desktopEntry || "").toLowerCase()
+  var token = ""
+  var i = 0
+
+  for (i = 0; i < priorityIdentities.length; i++) {
+    token = String(priorityIdentities[i]).toLowerCase()
+    if (!token) continue
+    if (dbusName.indexOf(token) !== -1 || identity.indexOf(token) !== -1 || desktopEntry.indexOf(token) !== -1) return true
+  }
+
+  return false
+}
+
 function hasMetadata(player) {
   return !!(player && (player.trackTitle || player.trackArtist || player.identity || player.desktopEntry))
 }
@@ -76,8 +124,11 @@ function playerHasPlaybackStream(player, playbackStreams) {
   if (!playerKey) return false
 
   var streams = Array.isArray(playbackStreams) ? playbackStreams : []
-  for (var i = 0; i < streams.length; i++) {
-    var streamKey = streamLabelKey(rawStreamLabel(streams[i]))
+  var streamKey = ""
+  var i = 0
+
+  for (i = 0; i < streams.length; i++) {
+    streamKey = streamLabelKey(rawStreamLabel(streams[i]))
     if (!streamKey) continue
     if (streamKey === playerKey
         || streamKey.indexOf(playerKey) !== -1
@@ -122,6 +173,8 @@ function osdMessage(player, fallback) {
 if (typeof module !== "undefined") {
   module.exports = {
     isProxyPlayer: isProxyPlayer,
+    isPriorityPlayer: isPriorityPlayer,
+    playerIcon: playerIcon,
     hasMetadata: hasMetadata,
     hasTrackMetadata: hasTrackMetadata,
     playerCanControl: playerCanControl,

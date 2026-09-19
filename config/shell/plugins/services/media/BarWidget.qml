@@ -12,7 +12,9 @@ BarWidget {
   readonly property var sourcePlayers: mediaService ? mediaService.sourcePlayers : []
 
   readonly property bool hasMedia: activePlayer !== null && (activePlayer.trackTitle || activePlayer.trackArtist)
+  readonly property bool playing: activePlayer !== null && activePlayer.isPlaying
   readonly property string playIcon: activePlayer && activePlayer.isPlaying ? "󰏤" : "󰐊"
+  readonly property string sourceIcon: activePlayer && mediaService ? mediaService.playerIcon(activePlayer) : ""
   readonly property string title: activePlayer ? (activePlayer.trackTitle || "") : ""
   readonly property string artist: activePlayer ? (activePlayer.trackArtist || "") : ""
 
@@ -31,13 +33,24 @@ BarWidget {
     spacing: Style.space(6)
 
     Text {
+      id: sourceGlyph
+      textFormat: Text.PlainText
+      anchors.verticalCenter: parent.verticalCenter
+      visible: text !== ""
+      text: root.sourceIcon
+      color: root.bar.barForeground
+      font.family: root.bar.fontFamily
+      font.pixelSize: Style.bar.iconFont
+    }
+
+    Text {
       id: glyph
       textFormat: Text.PlainText
       anchors.verticalCenter: parent.verticalCenter
       text: root.playIcon
-      color: activePlayer && activePlayer.isPlaying ? root.bar.barForeground : Qt.darker(root.bar.barForeground, 1.5)
+      color: root.playing ? Color.accent : Qt.darker(root.bar.barForeground, 1.5)
       font.family: root.bar.fontFamily
-      font.pixelSize: Style.font.body
+      font.pixelSize: Style.bar.iconFont
       Behavior on color {
         enabled: !root.bar || root.bar.foregroundAnimationEnabled
         ColorAnimation { duration: 160 }
@@ -63,14 +76,29 @@ BarWidget {
 
         property bool needsScroll: implicitWidth > scrollClip.width
 
-        NumberAnimation on x {
-          id: scrollAnim
+        // Marquee scroll. A plain NumberAnimation used to stall mid-loop when
+        // the track changed underneath it (its duration re-evaluated, QML
+        // stopped the running animation and the label parked out of view,
+        // leaving an empty pill). A timer keeps scrolling even while the
+        // text/width reflows and always wraps fully around the clip.
+        onNeedsScrollChanged: if (!needsScroll) x = 0
+
+        Timer {
+          id: scrollClock
+          interval: 33
+          repeat: true
           running: labelText.needsScroll && !root.popupOpen && !root.bar.vertical
-          loops: Animation.Infinite
-          duration: Math.max(6000, labelText.implicitWidth * 25)
-          from: scrollClip.width
-          to: -labelText.implicitWidth
-          easing.type: Easing.Linear
+
+          // Match the old NumberAnimation pacing: traverses the clip plus
+          // label width in max(6000, width*25) ms.
+          readonly property real speedPxPerTick: 33 * (scrollClip.width + labelText.implicitWidth) / Math.max(6000, labelText.implicitWidth * 25)
+
+          onTriggered: {
+            labelText.x -= Math.max(0.5, scrollClock.speedPxPerTick)
+            if (labelText.x < -labelText.implicitWidth) labelText.x = scrollClip.width
+          }
+
+          onRunningChanged: labelText.x = running ? scrollClip.width : 0
         }
       }
     }

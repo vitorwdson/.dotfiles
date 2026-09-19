@@ -15,6 +15,11 @@ active           = "{{ red }}"
 scale-with-font  = true
 size-horizontal  = 26
 size-vertical    = 28
+# Bar icon sizing. icon-canvas bounds each module icon's painted box (also the
+# size tray image icons render at); icon-font is the pixel size font glyphs
+# use inside that canvas (OpticalGlyph scales to fit).
+icon-canvas      = 20
+icon-font        = 18
 
 [hyprland]
 # Shared Hyprland-derived border tokens. Surface sections reference these so
@@ -115,9 +120,9 @@ base-size = 12
 # heading       = 16
 # display       = 24
 # display-large = 28
-icon-small    = 14
-icon          = 18
-icon-large    = 22
+icon-small    = 16
+icon          = 20
+icon-large    = 24
 
 [popups]
 # Shared by every bar flyout (dropdowns, OSD, popup cards).
