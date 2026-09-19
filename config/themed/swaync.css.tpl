@@ -68,8 +68,8 @@
 .notification-action:hover { background-color: {{ accent }}; }
 
 .widget-title {
-  color: {{ dark_foreground }};
-  font-size: 13px;
+  color: {{ light_foreground }};
+  font-size: 14px;
   font-weight: bold;
   margin: 6px 10px 2px;
 }
