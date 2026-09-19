@@ -17,7 +17,7 @@
   "hide-on-clear": true,
   "hide-on-action": true,
   "fit-to-screen": false,
-  "control-center-height": 420,
+  "control-center-height": 900,
   "text-empty": "No Notifications",
   "notification-visibility": {
     "suppress-media": {
