@@ -1555,7 +1555,28 @@ Item {
           onHoveredChanged: root.setCenterSectionHovered(hovered)
         }
 
+        // A single pill spanning the anchor module plus the stacks anchored
+        // before/after it — hugging visible extents, not reserved space.
+        Rectangle {
+          id: centerPill
+          readonly property real leftEdge: beforeList.visible && beforeList.width > 0
+            ? beforeList.x
+            : centerAnchorModule.x
+          readonly property real rightEdge: afterList.visible && afterList.width > 0
+            ? afterList.x + afterList.width
+            : centerAnchorModule.x + centerAnchorModule.width
+          readonly property real extent: rightEdge - leftEdge
+          visible: centerRoot.hasAnchor && extent > 0
+          x: leftEdge - Style.space(2)
+          width: extent + Style.space(2) * 2
+          anchors.verticalCenter: parent.verticalCenter
+          height: parent.height - Style.space(2) * 2
+          radius: height / 2
+          color: Color.bar.pill
+        }
+
         ModuleList {
+          id: noAnchorList
           visible: !centerRoot.hasAnchor
           entries: centerRoot.entries
           region: "center"
@@ -1563,6 +1584,8 @@ Item {
         }
 
         ModuleList {
+          id: beforeList
+          showPill: false
           visible: centerRoot.hasAnchor
           entries: root.entriesBefore(centerRoot.entries, root.centerAnchor)
           region: "center"
@@ -1579,6 +1602,8 @@ Item {
         }
 
         ModuleList {
+          id: afterList
+          showPill: false
           visible: centerRoot.hasAnchor
           entries: root.entriesAfter(centerRoot.entries, root.centerAnchor)
           region: "center"
@@ -1600,7 +1625,28 @@ Item {
           onHoveredChanged: root.setCenterSectionHovered(hovered)
         }
 
+        // A single pill spanning the anchor module plus the stacks anchored
+        // above/below it — hugging visible extents, not reserved space.
+        Rectangle {
+          id: centerPillV
+          readonly property real topEdge: beforeList.visible && beforeList.height > 0
+            ? beforeList.y
+            : centerAnchorModule.y
+          readonly property real bottomEdge: afterList.visible && afterList.height > 0
+            ? afterList.y + afterList.height
+            : centerAnchorModule.y + centerAnchorModule.height
+          readonly property real extent: bottomEdge - topEdge
+          visible: centerRoot.hasAnchor && extent > 0
+          y: topEdge - Style.space(2)
+          height: extent + Style.space(2) * 2
+          anchors.horizontalCenter: parent.horizontalCenter
+          width: parent.width - Style.space(2) * 2
+          radius: width / 2
+          color: Color.bar.pill
+        }
+
         ModuleList {
+          id: noAnchorListV
           visible: !centerRoot.hasAnchor
           entries: centerRoot.entries
           region: "center"
@@ -1608,6 +1654,8 @@ Item {
         }
 
         ModuleList {
+          id: beforeList
+          showPill: false
           visible: centerRoot.hasAnchor
           entries: root.entriesBefore(centerRoot.entries, root.centerAnchor)
           region: "center"
@@ -1624,6 +1672,8 @@ Item {
         }
 
         ModuleList {
+          id: afterList
+          showPill: false
           visible: centerRoot.hasAnchor
           entries: root.entriesAfter(centerRoot.entries, root.centerAnchor)
           region: "center"
@@ -1721,6 +1771,10 @@ Item {
 
     property var entries: []
     property string region: ""
+    // Regions normally paint one pill behind their module stack. The center
+    // region anchors three stacks around its anchor module, so those lists
+    // opt out and CenterModules paints a single pill spanning the union.
+    property bool showPill: true
 
     visible: entries.length > 0
     // A hidden list must not build its modules. The center section declares
@@ -1736,16 +1790,53 @@ Item {
     Component {
       id: horizontalModuleList
 
-      Row {
-        spacing: 0
+      // One rounded pill per bar region (left/center/right): a faint
+      // translucent capsule behind the module stack, hugging its contents.
+      // The pill is a visual overlay only: it may pad past the list bounds
+      // so its capsule ends cleanly inside the bar, while the loader keeps
+      // the module width so neighbours and anchors never shift.
+      Item {
+        id: pillWrap
 
-        Repeater {
-          model: moduleListRoot.entries
+        readonly property real contentExtent: {
+          var extent = 0
+          for (var i = 0; i < regionRow.children.length; i++) {
+            var c = regionRow.children[i]
+            if (c.visible && "pillExtent" in c) extent += c.pillExtent
+          }
+          return extent
+        }
 
-          ModuleSlot {
-            required property var modelData
-            entry: modelData
-            region: moduleListRoot.region
+        implicitWidth: regionRow.implicitWidth
+        implicitHeight: root.barSize
+
+        Rectangle {
+          visible: moduleListRoot.showPill && pillWrap.contentExtent > 0
+          // The right region grows leftward (drawer-style widgets reserve
+          // space on that side), so anchor its pill to the right edge.
+          x: moduleListRoot.region === "right"
+            ? parent.width - width + Style.space(2)
+            : -Style.space(2)
+          anchors.verticalCenter: parent.verticalCenter
+          width: pillWrap.contentExtent + Style.space(2) * 2
+          height: parent.height - Style.space(2) * 2
+          radius: height / 2
+          color: Color.bar.pill
+        }
+
+        Row {
+          id: regionRow
+          anchors.centerIn: parent
+          spacing: 0
+
+          Repeater {
+            model: moduleListRoot.entries
+
+            ModuleSlot {
+              required property var modelData
+              entry: modelData
+              region: moduleListRoot.region
+            }
           }
         }
       }
@@ -1754,16 +1845,47 @@ Item {
     Component {
       id: verticalModuleList
 
-      Column {
-        spacing: 0
+      Item {
+        id: pillWrapV
 
-        Repeater {
-          model: moduleListRoot.entries
+        readonly property real contentExtent: {
+          var extent = 0
+          for (var i = 0; i < regionColumn.children.length; i++) {
+            var c = regionColumn.children[i]
+            if (c.visible && "pillExtent" in c) extent += c.pillExtent
+          }
+          return extent
+        }
 
-          ModuleSlot {
-            required property var modelData
-            entry: modelData
-            region: moduleListRoot.region
+        implicitWidth: root.barSize
+        implicitHeight: regionColumn.implicitHeight
+
+        Rectangle {
+          visible: moduleListRoot.showPill && pillWrapV.contentExtent > 0
+          // For a vertical bar the "right" region is the bottom stack.
+          y: moduleListRoot.region === "right"
+            ? parent.height - height + Style.space(2)
+            : -Style.space(2)
+          anchors.horizontalCenter: parent.horizontalCenter
+          height: pillWrapV.contentExtent + Style.space(2) * 2
+          width: parent.width - Style.space(2) * 2
+          radius: width / 2
+          color: Color.bar.pill
+        }
+
+        Column {
+          id: regionColumn
+          anchors.centerIn: parent
+          spacing: 0
+
+          Repeater {
+            model: moduleListRoot.entries
+
+            ModuleSlot {
+              required property var modelData
+              entry: modelData
+              region: moduleListRoot.region
+            }
           }
         }
       }
@@ -1816,6 +1938,18 @@ Item {
     width: implicitWidth
     height: implicitHeight
     z: modulePointer.dragging ? 100 : 0
+
+    // Extent the region pill should hug along the bar axis. Widgets that
+    // reserve collapsed space (a drawer or reveal area that opens on hover)
+    // expose `pillAxisExtent` so the pill stays tight while the slot keeps
+    // its layout width. Falls back to the slot's own extent.
+    readonly property real pillExtent: {
+      if (!activeItem || !activeItem.visible) return 0
+      var key = root.vertical ? "pillExtentVertical" : "pillAxisExtent"
+      var hint = key in activeItem ? activeItem[key] : undefined
+      if (hint !== undefined && hint !== null && hint >= 0) return hint
+      return root.vertical ? height : width
+    }
 
     Component.onCompleted: root.registerModuleSlot(slot)
     Component.onDestruction: {

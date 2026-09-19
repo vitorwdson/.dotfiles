@@ -32,6 +32,15 @@ BarWidget {
   readonly property int animationDuration: 600
   property real revealProgress: expanded ? 1 : 0
   readonly property real revealExtent: drawerExtent * revealProgress
+  // The slot reserves the collapsed drawer's slide-in space so hover doesn't
+  // shift neighbours; the region pill should hug the *visible* tray instead.
+  // pillAxisExtent is measured along the bar axis (width here, height for
+  // vertical trays, which reserve nothing). -1 falls back to the slot extent.
+  readonly property real pillAxisExtent: root.vertical
+    ? -1
+    : trayContent.item
+      ? trayContent.item.implicitWidth - (root.drawerExtent - root.revealExtent)
+      : width
 
   // Submenu drill-down state. QsMenuEntry.display() renders a *platform* menu,
   // which Quickshell refuses unless the shell root sets `//@ pragma
