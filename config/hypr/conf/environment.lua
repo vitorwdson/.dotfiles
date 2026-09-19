@@ -8,6 +8,7 @@ hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/ssh-agent.socket")
 ------------------------- AUTOSTART (was exec-once) --------
 hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
+    hl.exec_cmd("swaync")
     hl.exec_cmd("pypr")
     hl.exec_cmd("solaar --window=hide")
     hl.exec_cmd("hyprctl setcursor Dracula-cursors 24")

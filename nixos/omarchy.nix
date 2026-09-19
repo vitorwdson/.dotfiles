@@ -57,6 +57,8 @@ in
     brightnessctl
     pamixer
     hyprsunset # blue-light filter / night light (bar nightlight plugin)
+
+    swaynotificationcenter # notification daemon + control center
     inotify-tools
     socat
     ydotool

@@ -1,0 +1,32 @@
+#!/run/current-system/sw/bin/bash
+
+# omarchy:summary=Sync current Omarchy theme into SwayNC styling
+# omarchy:hidden=true
+
+CURRENT_THEME_PATH="$HOME/.local/state/omarchy/current/theme"
+SWAYNC_DIR="$HOME/.config/swaync"
+THEME_CSS="$CURRENT_THEME_PATH/swaync.css"
+
+# The repo the script's own directory lives in (the ~ symlink path isn't a
+# physical location, so resolve it first).
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]:-$0}")")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+
+swaync_client() {
+  if command -v swaync-client >/dev/null 2>&1; then
+    swaync-client "$@" 2>/dev/null || true
+  fi
+}
+
+mkdir -p "$SWAYNC_DIR"
+
+# Config comes from the repo; the stylesheet is the per-theme file the
+# template engine regenerates on every omarchy-theme-set. Symlinks so theme
+# switches swap the CSS content in place, then the daemon reloads it.
+ln -sfn "$REPO_ROOT/config/swaync/config.json" "$SWAYNC_DIR/config.json"
+if [[ -f $THEME_CSS ]]; then
+  ln -sfn "$THEME_CSS" "$SWAYNC_DIR/style.css"
+fi
+
+swaync_client -rs
+

@@ -2225,8 +2225,8 @@ Item {
       if (!target) return
       if ("bar" in target) target.bar = firstParty
         ? root : root.pluginBarApiFor(pluginApiId, moduleName, registered)
-      if ("moduleName" in target) target.moduleName = moduleName
-      if ("settings" in target) target.settings = moduleSettings
+      if ("moduleName" in target && target.handlesOwnModuleIdentity !== true) target.moduleName = moduleName
+      if ("settings" in target && target.handlesOwnModuleIdentity !== true) target.settings = moduleSettings
     }
 
     Component {
@@ -2239,6 +2239,9 @@ Item {
     id: customRoot
 
     required property var entry
+    // ModuleSlot.injectProps would assign the layout id into moduleName and
+    // trip on the read-only property; this module derives it from entry.
+    readonly property bool handlesOwnModuleIdentity: true
     readonly property string moduleName: root.entryId(entry)
     readonly property var settings: root.entrySettings(entry)
     property string outputText: ""

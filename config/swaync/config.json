@@ -1,0 +1,42 @@
+{
+  "ignore-gtk-theme": true,
+  "cssPriority": "user",
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "layer-shell": true,
+  "control-center-layer": "top",
+  "control-center-margin-top": 6,
+  "control-center-margin-right": 6,
+  "notification-window-width": 420,
+  "timeout": 10,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "transition-time": 200,
+  "notification-grouping": true,
+  "hide-on-clear": true,
+  "hide-on-action": true,
+  "fit-to-screen": true,
+  "text-empty": "No Notifications",
+  "notification-visibility": {
+    "suppress-media": {
+      "state": "muted",
+      "app-name": "^(Spotify|spotify|Firefox|firefox|Chromium|chromium|YouTube|mpv)$"
+    }
+  },
+  "widgets": [
+    "title",
+    "dnd",
+    "notifications"
+  ],
+  "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear All"
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    }
+  }
+}
