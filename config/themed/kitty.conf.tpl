@@ -1,5 +1,5 @@
 foreground {{ foreground }}
-background {{ background }}
+background #000000
 selection_foreground {{ selection_foreground }}
 selection_background {{ selection_background }}
 
