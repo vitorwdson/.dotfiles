@@ -36,18 +36,11 @@ in
     shared-mime-info
 
     loupe
-    swaylock
-    wlogout
     udiskie
     xwayland
     hyprpicker
     playerctl
-    pavucontrol
     pyprland
-    hyprshot
-    wl-clipboard
-    cliphist
-    perl5Packages.FileMimeInfo
     hyprpolkitagent
     networkmanagerapplet
 

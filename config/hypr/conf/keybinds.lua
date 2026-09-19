@@ -8,7 +8,7 @@ hl.bind(mainMod .. " + CTRL + T", hl.dsp.exec_cmd("pypr toggle term && hyprctl d
 hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("omarchy-restart-shell"))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind("ALT + F4", hl.dsp.window.close())
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("wlogout --protocol layer-shell -b 2"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("omarchy-menu toggle system"))
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("uwsm stop")) -- clean session exit under uwsm
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("omarchy-launch-nautilus"))
 hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.float({ action = "toggle" }))
