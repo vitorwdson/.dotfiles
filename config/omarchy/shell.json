@@ -14,9 +14,9 @@
           ]
         },
         {
-          "format": "dddd HH:mm",
-          "formatAlt": "d MMMM 'W'ww yyyy",
           "id": "omarchy.clock",
+          "format": "ddd d MMM HH:mm",
+          "formatAlt": "d MMMM 'W'ww yyyy",
           "verticalFormat": "HH\n—\nmm"
         },
         {
@@ -32,6 +32,15 @@
       "left": [
         {
           "id": "omarchy.workspaces"
+        },
+        {
+          "id": "omarchy.spacer",
+          "settings": {
+            "size": 14
+          }
+        },
+        {
+          "id": "omarchy.media"
         }
       ],
       "right": [
@@ -49,9 +58,6 @@
         },
         {
           "id": "omarchy.audio"
-        },
-        {
-          "id": "omarchy.media"
         },
         {
           "id": "omarchy.monitor"

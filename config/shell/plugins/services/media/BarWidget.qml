@@ -13,7 +13,7 @@ BarWidget {
 
   readonly property bool hasMedia: activePlayer !== null && (activePlayer.trackTitle || activePlayer.trackArtist)
   readonly property bool playing: activePlayer !== null && activePlayer.isPlaying
-  readonly property string playIcon: activePlayer && activePlayer.isPlaying ? "󰏤" : "󰐊"
+  readonly property string playIcon: activePlayer && activePlayer.isPlaying ? "\uF04C" : "\uF04B"
   readonly property string sourceIcon: activePlayer && mediaService ? mediaService.playerIcon(activePlayer) : ""
   readonly property string title: activePlayer ? (activePlayer.trackTitle || "") : ""
   readonly property string artist: activePlayer ? (activePlayer.trackArtist || "") : ""
@@ -50,7 +50,9 @@ BarWidget {
       text: root.playIcon
       color: root.playing ? Color.accent : Qt.darker(root.bar.barForeground, 1.5)
       font.family: root.bar.fontFamily
-      font.pixelSize: Style.bar.iconFont
+      // The fa play/pause glyphs carry more optical padding than the md
+      // variants; still shave a pinch off so they sit below the source icon.
+      font.pixelSize: Math.max(10, Math.round(Style.bar.iconFont * 0.8))
       Behavior on color {
         enabled: !root.bar || root.bar.foregroundAnimationEnabled
         ColorAnimation { duration: 160 }

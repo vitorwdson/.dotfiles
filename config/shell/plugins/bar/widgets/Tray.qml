@@ -41,6 +41,9 @@ BarWidget {
     : trayContent.item
       ? trayContent.item.implicitWidth - (root.drawerExtent - root.revealExtent)
       : width
+  // The reserved drawer lives left of the visible tray, so the region pill
+  // must align the tray's visible extent to the slot's right edge.
+  readonly property string pillAnchor: root.vertical ? "top" : "right"
 
   // Submenu drill-down state. QsMenuEntry.display() renders a *platform* menu,
   // which Quickshell refuses unless the shell root sets `//@ pragma

@@ -1790,8 +1790,10 @@ Item {
     Component {
       id: horizontalModuleList
 
-      // One rounded pill per bar region (left/center/right): a faint
+      // One rounded pill per contiguous module run in a bar region: a faint
       // translucent capsule behind the module stack, hugging its contents.
+      // An `omarchy.spacer` module breaks the stack into separate pills so
+      // regions can host visually distinct groups (workspaces | media).
       // The pill is a visual overlay only: it may pad past the list bounds
       // so its capsule ends cleanly inside the bar, while the loader keeps
       // the module width so neighbours and anchors never shift.
@@ -1807,21 +1809,59 @@ Item {
           return extent
         }
 
+        // Contiguous [x, w] runs of visible, drawable slots in regionRow's
+        // coordinates. A spacer slot ends the running segment. Widgets that
+        // reserve collapsed drawer space left of their chevron can anchor
+        // their visible extent to the slot's right edge via pillAnchor=right.
+        function computePillSegments() {
+          var segments = []
+          var minX = -1
+          var maxX = -1
+          for (var i = 0; i < regionRow.children.length; i++) {
+            var c = regionRow.children[i]
+            if (!c || !("pillExtent" in c)) continue
+            if (c.pillBreak) {
+              if (minX !== -1) {
+                segments.push({ x: regionRow.x + minX, w: maxX - minX })
+                minX = -1
+              }
+              continue
+            }
+            if (!c.visible || c.pillExtent <= 0) continue
+            var anchorRight = c.pillAnchor === "right"
+            var segStart = anchorRight ? c.x + c.width - c.pillExtent : c.x
+            var segEnd = anchorRight ? c.x + c.width : c.x + c.pillExtent
+            if (minX === -1) {
+              minX = segStart
+              maxX = segEnd
+            } else {
+              minX = Math.min(minX, segStart)
+              maxX = Math.max(maxX, segEnd)
+            }
+          }
+          if (minX !== -1) segments.push({ x: regionRow.x + minX, w: maxX - minX })
+          return segments
+        }
+
+        readonly property var pillSegments: moduleListRoot.showPill ? computePillSegments() : []
+
         implicitWidth: regionRow.implicitWidth
         implicitHeight: root.barSize
 
-        Rectangle {
-          visible: moduleListRoot.showPill && pillWrap.contentExtent > 0
-          // The right region grows leftward (drawer-style widgets reserve
-          // space on that side), so anchor its pill to the right edge.
-          x: moduleListRoot.region === "right"
-            ? parent.width - width + Style.space(2)
-            : -Style.space(2)
-          anchors.verticalCenter: parent.verticalCenter
-          width: pillWrap.contentExtent + Style.space(2) * 2
-          height: parent.height - Style.space(2) * 2
-          radius: height / 2
-          color: Color.bar.pill
+        Repeater {
+          model: pillWrap.pillSegments
+
+          Rectangle {
+            required property var modelData
+            readonly property var seg: modelData
+            visible: seg.w > 0
+            x: seg.x - Style.space(2)
+            width: seg.w + Style.space(2) * 2
+            anchors.verticalCenter: parent.verticalCenter
+            height: parent.height - Style.space(2) * 2
+            radius: height / 2
+            color: Color.bar.pill
+          }
         }
 
         Row {
@@ -1857,20 +1897,59 @@ Item {
           return extent
         }
 
+        // Contiguous [y, h] runs of visible, drawable slots in regionColumn's
+        // coordinates. A spacer slot ends the running segment.
+        function computePillSegments() {
+          var segments = []
+          var minY = -1
+          var maxY = -1
+          for (var i = 0; i < regionColumn.children.length; i++) {
+            var c = regionColumn.children[i]
+            if (!c || !("pillExtent" in c)) continue
+            if (c.pillBreak) {
+              if (minY !== -1) {
+                segments.push({ y: regionColumn.y + minY, h: maxY - minY })
+                minY = -1
+              }
+              continue
+            }
+            if (!c.visible || c.pillExtent <= 0) continue
+            // "bottom" pins the visible extent to the slot's bottom edge
+            // (the vertical analogue of the tray's right anchor).
+            var anchorStart = c.pillAnchor === "bottom" || (c.pillAnchor === "right" && root.vertical)
+            var segStart = anchorStart ? c.y + c.height - c.pillExtent : c.y
+            var segEnd = anchorStart ? c.y + c.height : c.y + c.pillExtent
+            if (minY === -1) {
+              minY = segStart
+              maxY = segEnd
+            } else {
+              minY = Math.min(minY, segStart)
+              maxY = Math.max(maxY, segEnd)
+            }
+          }
+          if (minY !== -1) segments.push({ y: regionColumn.y + minY, h: maxY - minY })
+          return segments
+        }
+
+        readonly property var pillSegments: moduleListRoot.showPill ? computePillSegments() : []
+
         implicitWidth: root.barSize
         implicitHeight: regionColumn.implicitHeight
 
-        Rectangle {
-          visible: moduleListRoot.showPill && pillWrapV.contentExtent > 0
-          // For a vertical bar the "right" region is the bottom stack.
-          y: moduleListRoot.region === "right"
-            ? parent.height - height + Style.space(2)
-            : -Style.space(2)
-          anchors.horizontalCenter: parent.horizontalCenter
-          height: pillWrapV.contentExtent + Style.space(2) * 2
-          width: parent.width - Style.space(2) * 2
-          radius: width / 2
-          color: Color.bar.pill
+        Repeater {
+          model: pillWrapV.pillSegments
+
+          Rectangle {
+            required property var modelData
+            readonly property var seg: modelData
+            visible: seg.h > 0
+            y: seg.y - Style.space(2)
+            height: seg.h + Style.space(2) * 2
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - Style.space(2) * 2
+            radius: width / 2
+            color: Color.bar.pill
+          }
         }
 
         Column {
@@ -1898,6 +1977,8 @@ Item {
     required property var entry
     property string region: ""
     readonly property string moduleName: root.entryId(entry)
+    // Spacers split a region's module run into separate pills.
+    readonly property bool pillBreak: moduleName === "omarchy.spacer"
     readonly property var moduleSettings: root.entrySettings(entry)
     readonly property string customType: root.customModuleType(entry)
     readonly property var registryMetadata: root.barWidgetRegistry.metadataFor(root.canonicalWidgetId(moduleName))
@@ -1949,6 +2030,15 @@ Item {
       var hint = key in activeItem ? activeItem[key] : undefined
       if (hint !== undefined && hint !== null && hint >= 0) return hint
       return root.vertical ? height : width
+    }
+
+    // Where the pill should anchor the widget's visible extent inside the
+    // slot ("left"/"right" horizontal, "top"/"bottom" vertical). Drawer-
+    // style widgets reserve collapsed space at the far end of their reveal
+    // direction, so they need the pill hugging the opposite edge.
+    readonly property string pillAnchor: {
+      if (!activeItem) return ""
+      return String("pillAnchor" in activeItem && activeItem.pillAnchor ? activeItem.pillAnchor : "")
     }
 
     Component.onCompleted: root.registerModuleSlot(slot)
