@@ -56,18 +56,18 @@ theme_color() {
 }
 
 sync_tmux_window_style() {
-  local background foreground cursor
+  local cursor
 
   [[ -f $COLORS_TOML ]] || return
 
-  foreground=$(theme_color foreground)
-  background=$(theme_color background)
   cursor=$(theme_color cursor)
 
-  [[ -n $foreground && -n $background ]] || return
-
-  tmux set-option -g window-style "fg=$foreground,bg=$background" 2>/dev/null || true
-  tmux set-option -g window-active-style "fg=$foreground,bg=$background" 2>/dev/null || true
+  # Omarchy upstream sets these to the theme background, but this port keeps
+  # the terminal intentionally true-black (kitty background #000000, matching
+  # tmux.conf's window-style) so a theme switch must not repolish panes into
+  # the theme background and create the old kitty-vs-tmux color seam.
+  tmux set-option -g window-style "bg=#000000" 2>/dev/null || true
+  tmux set-option -g window-active-style "bg=#000000" 2>/dev/null || true
 
   # Apps like nvim clear the per-pane cursor colour with OSC 112. Without a
   # global fallback, tmux then resets the outer terminal's cursor, which in
