@@ -175,11 +175,18 @@ in
 	];
 	fonts.fontconfig = {
 		defaultFonts = {
-			serif = [  "Noto Serif" ];
-			sansSerif = [ "Noto Sans" ];
-			monospace = [ "Fira Code" ];
+			serif = [ "Liberation Serif" ];
+			sansSerif = [ "Liberation Sans" ];
+			monospace = [ "JetBrainsMono Nerd Font" ];
 		};
 	};
+
+	# Register omarchy's fontconfig directives (locale/emoji resolution rules)
+	fonts.fontconfig.confPackages = [
+		(pkgs.runCommand "omarchy-fontconfig" { } ''
+			install -D -m 444 ${../config/fontconfig/50-omarchy.conf} $out/share/fontconfig/conf.avail/50-omarchy.conf
+		'')
+	];
 
 
 	# Steam

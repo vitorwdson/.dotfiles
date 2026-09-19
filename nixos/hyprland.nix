@@ -12,7 +12,7 @@ in
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   xdg.mime.defaultApplications = {
-    "inode/directory" = "org.kde.dolphin.desktop";
+    "inode/directory" = "org.gnome.Nautilus.desktop";
   };
 
   services = {
@@ -31,22 +31,14 @@ in
 
   environment.systemPackages = with pkgs; [
     adwaita-icon-theme
-    kdePackages.dolphin
-    kdePackages.kservice
+    nautilus
     xdg-utils
     shared-mime-info
 
     loupe
-    swaynotificationcenter
-    waybar
     swaylock
     wlogout
-    wofi
-    rofi-unwrapped
-    hyprpaper
     udiskie
-    grim
-    slurp
     xwayland
     hyprpicker
     playerctl

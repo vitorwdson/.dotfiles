@@ -175,6 +175,22 @@ echo "sudo dnf install solaar"
 
 echo ""
 echo ""
+echo "Linking omarchy extras (fonts, xdg-terminal-exec list)..."
+mkdir -p "$HOME/.local/share/fonts" "$HOME/.local/share/xdg-terminal-exec"
+for target in fonts/omarchy xdg-terminal-exec; do
+    destiny="$HOME/.local/share/$target"
+    if [[ -L "$destiny" ]]; then
+        unlink "$destiny"
+    elif [[ -e "$destiny" ]]; then
+        mv "$destiny" "$destiny.bak.omarchy"
+    fi
+    ln -s "$SCRIPT_DIR/config/$target" "$destiny"
+    echo "Linking $SCRIPT_DIR/config/$target to $destiny"
+done
+fc-cache -f "$HOME/.local/share/fonts/omarchy" 2>/dev/null || true
+echo ""
+
+echo ""
 echo "Some other useful links:"
 echo ""
 echo "Configuring flashing/training for my moonlander:"

@@ -6,7 +6,7 @@
 }
 {
     "label" : "logout",
-    "action" : "sleep 0.5; hyprctl dispatch exit",
+    "action" : "sleep 0.5; uwsm stop",
     "text" : "Logout",
     "keybind" : "o"
 }

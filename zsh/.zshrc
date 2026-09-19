@@ -29,7 +29,8 @@ source <(fzf --zsh)
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH="/usr/local/go/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$HOME/go/bin:$HOME/.local/scripts:$HOME/.local/bin:$HOME/.fzf/bin:$HOME/.cargo/bin:$PATH"
+export OMARCHY_PATH="$HOME/.config"
+export PATH="$HOME/go/bin:$HOME/.local/scripts:$HOME/.local/scripts/omarchy:$HOME/.local/bin:$HOME/.fzf/bin:$HOME/.cargo/bin:$PATH"
 export EDITOR=nvim 
 export UV_PROJECT_ENVIRONMENT=venv
 

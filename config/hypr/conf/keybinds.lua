@@ -5,16 +5,24 @@ local mainMod = "SUPER"
 ------------------------- GENERAL --------------------------
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + CTRL + T", hl.dsp.exec_cmd("pypr toggle term && hyprctl dispatch bringactivetotop"))
-hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/restart.sh"))
+hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("omarchy-restart-shell"))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind("ALT + F4", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("wlogout --protocol layer-shell -b 2"))
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("uwsm stop")) -- clean session exit under uwsm
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("dolphin"))
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("omarchy-launch-nautilus"))
 hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("pkill rofi || rofi -show drun"))
+
+-- Omarchy app launcher / menu
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("omarchy-menu toggle apps"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("omarchy-menu toggle"))
+
+-- Theme & background pickers: switcher prints the selection, then set applies it
+hl.bind(mainMod .. " + CTRL + SPACE", hl.dsp.exec_cmd("bash -lc 'background=$(omarchy-theme-bg-switcher); [[ -n $background ]] && omarchy-theme-bg-set \"$background\"'"))
+hl.bind(mainMod .. " + SHIFT + CTRL + SPACE", hl.dsp.exec_cmd("bash -lc 'theme=$(omarchy-theme-switcher); [[ -n $theme ]] && omarchy-theme-set \"$theme\"'"))
+
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 -- hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit"))
@@ -70,8 +78,11 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 ------------------------- SCREENSHOTS ----------------------
-hl.bind("PRINT", hl.dsp.exec_cmd("pkill wofi || ~/.config/wofi/scripts/hyprshot.sh"))
-hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m output -m HDMI-A-1"))
+hl.bind("PRINT", hl.dsp.exec_cmd("omarchy-capture-screenshot region"))
+
+-- Keep the old favourites working: omarchy-capture-screenshot region copies to
+-- clipboard by default; these reproduce the old full-monitor shortcut.
+hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("omarchy-capture-screenshot fullscreen"))
 
 ------------------------- MEDIA KEYS -----------------------
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"))

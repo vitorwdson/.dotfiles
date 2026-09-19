@@ -1,0 +1,12 @@
+#!/run/current-system/sw/bin/bash
+
+# omarchy:summary=Open Voxtype configuration
+set -e
+
+if omarchy-cmd-missing voxtype; then
+  omarchy-notification-send "Voxtype not installed" "Dictation tool (voxtype) is not installed." || true
+  exit 0
+fi
+
+omarchy-launch-floating-terminal-with-presentation "voxtype configure"
+omarchy-restart-shell

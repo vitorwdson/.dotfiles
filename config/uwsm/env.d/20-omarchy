@@ -1,0 +1,3 @@
+# Omarchy runtime contract for uwsm-started sessions.
+export OMARCHY_PATH="$HOME/.config"
+export PATH="$HOME/.local/scripts/omarchy:$HOME/.local/scripts:$HOME/.local/bin:$PATH"

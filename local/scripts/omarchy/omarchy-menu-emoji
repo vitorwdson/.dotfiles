@@ -1,0 +1,6 @@
+#!/run/current-system/sw/bin/bash
+# omarchy:summary=Launch emojis
+# omarchy:group=menu
+# omarchy:examples=omarchy menu emoji
+
+omarchy-shell shell toggle omarchy.emojis

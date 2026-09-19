@@ -1,2 +1,6 @@
 config/nvim
 backup
+
+# Nix build outputs (nix-build / nix-instantiate with default output link)
+result
+result-*
