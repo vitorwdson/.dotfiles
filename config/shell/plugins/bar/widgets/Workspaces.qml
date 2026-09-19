@@ -79,6 +79,16 @@ BarWidget {
         fixedWidth: root.vertical ? root.barSize : Style.space(20)
         fixedHeight: root.barSize
         onPressed: function() { root.focusWorkspace(modelData) }
+        // Parity with the old waybar config: scroll switches to the previous
+        // (up) / next (down) workspace from the focused one.
+        onWheelMoved: function(delta) {
+          var ids = root.workspaceIds()
+          var idx = ids.indexOf(Hyprland.focusedWorkspace !== null ? Hyprland.focusedWorkspace.id : -1)
+          if (idx === -1) return
+          var nextId = ids[idx + (delta > 0 ? -1 : 1)]
+          if (nextId === undefined) return
+          root.focusWorkspace(nextId)
+        }
       }
     }
   }
