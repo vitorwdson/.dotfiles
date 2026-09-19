@@ -77,6 +77,10 @@ in
     noto-fonts-color-emoji
     webp-pixbuf-loader # image picker thumbnails
 
+    # GTK apps (swaync, dialogs) resolve the portal icon theme
+    # org.gnome.desktop.interface icon-theme = breeze-dark.
+    kdePackages.breeze-icons
+
     # Thumbnail generators used by the theme background picker
     vips # vipsthumbnail
     ffmpegthumbnailer
