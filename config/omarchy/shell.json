@@ -53,16 +53,9 @@
           "id": "omarchy.bluetooth"
         },
         {
-          "id": "omarchy.notifications-center",
-          "type": "command",
-          "text": "",
-          "fontSize": 18,
-          "interval": 2,
-          "tooltip": "Notification center (right-click toggles DND)",
-          "exec": "printf '{\"text\":\"\\uF0F3\",\"class\":\"%s\"}' $([ \"$(swaync-client -D)\" = true ] && echo active || echo inactive)",
-          "onClick": "swaync-client -t -sw",
-          "onRightClick": "swaync-client -d"
+          "id": "omarchy.notifications-center"
         },
+
         {
           "id": "omarchy.network"
         },

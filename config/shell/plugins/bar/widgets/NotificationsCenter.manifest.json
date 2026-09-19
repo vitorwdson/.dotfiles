@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "omarchy.notifications-center",
+  "name": "Notifications center",
+  "version": "1.0.0",
+  "author": "Omarchy",
+  "description": "SwayNC notification bell with panel and DND toggles",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "NotificationsCenter.qml"
+  },
+  "barWidget": {
+    "displayName": "Notifications center",
+    "description": "SwayNC bell: click opens the notification panel (right click toggles DND)",
+    "category": "System",
+    "allowMultiple": false
+  }
+}
