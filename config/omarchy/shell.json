@@ -10,63 +10,78 @@
             "Reminder",
             "ScreenRecording",
             "StayAwake"
-          ]
+          ],
+          "locked": true
         },
         {
           "id": "omarchy.clock",
           "format": "ddd d MMM HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
-          "verticalFormat": "HH\n—\nmm"
+          "verticalFormat": "HH\n—\nmm",
+          "locked": true
         },
         {
-          "id": "omarchy.keyboard-layout"
+          "id": "omarchy.keyboard-layout",
+          "locked": true
         },
         {
-          "id": "omarchy.weather"
+          "id": "omarchy.weather",
+          "locked": true
         },
         {
-          "id": "omarchy.system-update"
+          "id": "omarchy.system-update",
+          "locked": true
         }
       ],
       "left": [
         {
-          "id": "omarchy.workspaces"
+          "id": "omarchy.workspaces",
+          "locked": true
         },
         {
           "id": "omarchy.spacer",
           "settings": {
             "size": 14
-          }
+          },
+          "locked": true
         },
         {
-          "id": "omarchy.media"
+          "id": "omarchy.media",
+          "locked": true
         }
       ],
       "right": [
         {
-          "id": "omarchy.tray"
+          "id": "omarchy.tray",
+          "locked": true
         },
         {
-          "id": "omarchy.agents"
+          "id": "omarchy.agents",
+          "locked": true
         },
         {
-          "id": "omarchy.bluetooth"
+          "id": "omarchy.bluetooth",
+          "locked": true
         },
         {
-          "id": "omarchy.notifications-center"
-        },
-
-        {
-          "id": "omarchy.network"
+          "id": "omarchy.notifications-center",
+          "locked": true
         },
         {
-          "id": "omarchy.audio"
+          "id": "omarchy.network",
+          "locked": true
         },
         {
-          "id": "omarchy.monitor"
+          "id": "omarchy.audio",
+          "locked": true
         },
         {
-          "id": "omarchy.power"
+          "id": "omarchy.monitor",
+          "locked": true
+        },
+        {
+          "id": "omarchy.power",
+          "locked": true
         }
       ]
     },
