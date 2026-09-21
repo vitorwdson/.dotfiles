@@ -3,6 +3,7 @@
 ------------------------- WINDOW RULES ---------------------
 hl.window_rule({ match = { class = "^(kitty)$" },   opacity = "0.9 0.9" })
 hl.window_rule({ match = { class = "^(vesktop)$" }, opacity = "0.9 0.9" })
+hl.window_rule({ match = { class = "^(element)$" }, opacity = "0.9 0.9" })
 
 hl.window_rule({ match = { class = "^(discord)$" }, workspace = "3" })
 hl.window_rule({ match = { class = "^(vesktop)$" }, workspace = "3" })
