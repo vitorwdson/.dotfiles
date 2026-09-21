@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     # AUTO-INSTALL
+    element-desktop
     obs-studio
     cloudflared
     discord
